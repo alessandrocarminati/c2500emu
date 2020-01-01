@@ -1,0 +1,455 @@
+######## 11.0.9 ########
+03127C08
+03127C08 ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+03127C08
+03127C08 ; Attributes: bp-based frame
+03127C08
+03127C08 resolve_all_protocols:                  ; CODE XREF: sub_30CE1BC+88p
+03127C08
+03127C08 var_24C         = -$24C
+03127C08 var_248         = -$248
+03127C08 var_244         = -$244
+03127C08 var_240         = -$240
+03127C08 var_23C         = -$23C
+03127C08 var_238         = -$238
+03127C08 var_234         = -$234
+03127C08 var_230         = -$230
+03127C08 var_12C         = -$12C
+03127C08 var_128         = -$128
+03127C08 var_94          = -$94
+03127C08
+03127C08                 link    a6,#-$244
+03127C0C                 move.l  a3,-(sp)
+03127C0E                 move.l  a2,-(sp)
+03127C10                 moveq   #1,d1
+03127C12                 move.l  d1,($A36C).l
+03127C18                 pea     ($244).w
+03127C1C                 pea     var_244(a6)
+03127C20                 bsr.l   sub_30DAD2E
+03127C26                 movea.l ($37898).l,a0
+03127C2C                 bset    #4,$150(a0)
+03127C32                 bclr    #3,$150(a0)
+03127C38                 move.l  ($A374).l,-(sp)
+03127C3E                 bsr.l   sub_30E928E
+03127C44                 addq.w  #8,sp
+03127C46                 addq.w  #4,sp
+03127C48                 tst.l   ($3A394).l
+03127C4E                 beq.s   loc_3127CAE
+03127C50                 pea     (1).w
+03127C54                 pea     (1).w
+03127C58                 pea     aContinueWithCo ; "Continue with configuration dialog"
+03127C5C                 bsr.l   sub_30DC1D2
+03127C62                 addq.w  #8,sp
+03127C64                 addq.w  #4,sp
+03127C66                 tst.l   d0
+03127C68                 bne.w   loc_3127D46
+03127C6C                 bra.w   loc_3127F48
+03127C70 ; ---------------------------------------------------------------------------
+03127C70
+03127C70 loc_3127C70:                            ; CODE XREF: resolve_all_protocols+ECj
+03127C70                 pea     ($85).w
+03127C74                 pea     (2).w
+03127C78                 bsr.l   sub_30D600A
+03127C7E                 addq.w  #4,sp
+03127C80                 move.l  #$84,(sp)
+03127C86                 pea     (2).w
+03127C8A                 bsr.l   sub_30D600A
+03127C90                 addq.w  #4,sp
+03127C92                 move.l  a2,(sp)
+03127C94                 move.l  $DC(a2),-(sp)
+03127C98                 pea     ($68).w
+03127C9C                 pea     (2).w
+03127CA0                 bsr.l   sub_30D5236
+03127CA6                 addq.w  #8,sp
+03127CA8                 addq.w  #8,sp
+03127CAA                 bra.w   loc_3127F48
+03127CAE ; ---------------------------------------------------------------------------
+03127CAE
+03127CAE loc_3127CAE:                            ; CODE XREF: resolve_all_protocols+46j
+03127CAE                 pea     (1).w
+03127CB2                 pea     (1).w
+03127CB6                 pea     aWouldYouLikeTo ; "Would you like to enter the initial con"...
+03127CBA                 bsr.l   sub_30DC1D2
+03127CC0                 addq.w  #8,sp
+03127CC2                 addq.w  #4,sp
+03127CC4                 tst.l   d0
+03127CC6                 bne.s   loc_3127D46
+03127CC8                 movea.l ($6950).l,a0
+03127CCE                 movea.l (a0),a2
+03127CD0                 tst.l   a2
+03127CD2                 beq.w   loc_3127F48
+03127CD6
+03127CD6 loc_3127CD6:                            ; CODE XREF: resolve_all_protocols+138j
+03127CD6                 tst.l   $15D6(a2)
+03127CDA                 beq.s   loc_3127D3C
+03127CDC                 pea     (1).w
+03127CE0                 pea     (1).w
+03127CE4                 pea     aWouldYouLike_0 ; "\nWould you like to terminate autoinstal"...
+03127CE8                 bsr.l   sub_30DC1D2
+03127CEE                 addq.w  #8,sp
+03127CF0                 addq.w  #4,sp
+03127CF2                 tst.l   d0
+03127CF4                 bne.w   loc_3127C70
+03127CF8                 pea     aPleaseWait_Aut ; "\n\nPlease Wait. Autoinstall being attemp"...
+03127CFC                 bsr.l   sub_30E928E
+03127D02                 bsr.l   sub_30E947A
+03127D08                 addq.w  #4,sp
+03127D0A                 bra.s   loc_3127D2E
+03127D0C ; ---------------------------------------------------------------------------
+03127D0C
+03127D0C loc_3127D0C:                            ; CODE XREF: resolve_all_protocols+132j
+03127D0C                 tst.l   $15D6(a2)
+03127D10                 beq.s   loc_3127D3C
+03127D12                 pea     ($3E8).w
+03127D16                 bsr.l   sub_310DD58
+03127D1C                 pea     asc_3127B43     ; "!"
+03127D20                 bsr.l   sub_30E928E
+03127D26                 bsr.l   sub_30E947A
+03127D2C                 addq.w  #8,sp
+03127D2E
+03127D2E loc_3127D2E:                            ; CODE XREF: resolve_all_protocols+102j
+03127D2E                 movea.l ($37898).l,a0
+03127D34                 btst    #3,$150(a0)
+03127D3A                 beq.s   loc_3127D0C
+03127D3C
+03127D3C loc_3127D3C:                            ; CODE XREF: resolve_all_protocols+D2j
+03127D3C                                         ; resolve_all_protocols+108j
+03127D3C                 movea.l (a2),a2
+03127D3E                 tst.l   a2
+03127D40                 bne.s   loc_3127CD6
+03127D42                 bra.w   loc_3127F48
+03127D46 ; ---------------------------------------------------------------------------
+03127D46
+03127D46 loc_3127D46:                            ; CODE XREF: resolve_all_protocols+60j
+03127D46                                         ; resolve_all_protocols+BEj
+03127D46                 bsr.l   sub_31507A8
+03127D4C                 tst.l   d0
+03127D4E                 beq.s   loc_3127DA2
+03127D50                 pea     ($85).w
+03127D54                 pea     (2).w
+03127D58                 bsr.l   sub_30D600A
+03127D5E                 addq.w  #4,sp
+03127D60                 move.l  #$84,(sp)
+03127D66                 pea     (2).w
+03127D6A                 bsr.l   sub_30D600A
+03127D70                 addq.w  #8,sp
+03127D72                 movea.l ($6950).l,a0
+03127D78                 movea.l (a0),a2
+03127D7A                 tst.l   a2
+03127D7C                 beq.s   loc_3127DA2
+03127D7E
+03127D7E loc_3127D7E:                            ; CODE XREF: resolve_all_protocols+198j
+03127D7E                 tst.l   $15D6(a2)
+03127D82                 beq.s   loc_3127D9C
+03127D84                 move.l  a2,-(sp)
+03127D86                 move.l  $DC(a2),-(sp)
+03127D8A                 pea     ($68).w
+03127D8E                 pea     (2).w
+03127D92                 bsr.l   sub_30D5236
+03127D98                 addq.w  #8,sp
+03127D9A                 addq.w  #8,sp
+03127D9C
+03127D9C loc_3127D9C:                            ; CODE XREF: resolve_all_protocols+17Aj
+03127D9C                 movea.l (a2),a2
+03127D9E                 tst.l   a2
+03127DA0                 bne.s   loc_3127D7E
+03127DA2
+03127DA2 loc_3127DA2:                            ; CODE XREF: resolve_all_protocols+146j
+03127DA2                                         ; resolve_all_protocols+174j
+03127DA2                 pea     (1).w
+03127DA6                 pea     (1).w
+03127DAA                 pea     aFirstWouldYouL ; "\nFirst, would you like to see the curre"...
+03127DAE                 bsr.l   sub_30DC1D2
+03127DB4                 addq.w  #8,sp
+03127DB6                 addq.w  #4,sp
+03127DB8                 tst.l   d0
+03127DBA                 beq.s   loc_3127DDA
+03127DBC                 pea     asc_3127B81     ; "\n"
+03127DC0                 bsr.l   sub_30E928E
+03127DC6                 clr.l   (sp)
+03127DC8                 pea     ($46).w
+03127DCC                 pea     (1).w
+03127DD0                 bsr.l   sub_30D55CC
+03127DD6                 addq.w  #8,sp
+03127DD8                 addq.w  #4,sp
+03127DDA
+03127DDA loc_3127DDA:                            ; CODE XREF: resolve_all_protocols+1B2j
+03127DDA                 pea     asc_3127B81     ; "\n"
+03127DDE                 lea     (sub_30E928E).l,a2
+03127DE4                 jsr     (a2)
+03127DE6                 move.l  ($3A3A4).l,-(sp)
+03127DEC                 bsr.l   sub_30CAB4C
+03127DF2                 movea.l d0,a3
+03127DF4                 addq.w  #8,sp
+03127DF6                 tst.l   a3
+03127DF8                 bne.s   loc_3127E06
+03127DFA                 move.l  ($683C).l,-(sp)
+03127E00                 jsr     (a2)
+03127E02                 bra.w   loc_3127F48
+03127E06 ; ---------------------------------------------------------------------------
+03127E06
+03127E06 loc_3127E06:                            ; CODE XREF: resolve_all_protocols+1F0j
+03127E06                 move.l  a3,var_244(a6)
+03127E0A                 clr.l   var_240(a6)
+03127E0E                 moveq   #1,d1
+03127E10                 move.l  d1,var_230(a6)
+03127E14                 move.l  d1,var_23C(a6)
+03127E18                 clr.l   var_238(a6)
+03127E1C                 clr.l   var_234(a6)
+03127E20                 clr.l   var_12C(a6)
+03127E24                 clr.l   var_128(a6)
+03127E28                 clr.l   d0
+03127E2A
+03127E2A loc_3127E2A:                            ; CODE XREF: resolve_all_protocols+234j
+03127E2A                 lea     (a6,d0.l*4),a0
+03127E2E                 clr.l   -$22C(a0)
+03127E32                 clr.l   -$1AC(a0)
+03127E36                 addq.l  #1,d0
+03127E38                 moveq   #$1F,d1
+03127E3A                 cmp.l   d0,d1
+03127E3C                 bge.s   loc_3127E2A
+03127E3E                 clr.l   var_94(a6)
+03127E42                 pea     var_244(a6)
+03127E46                 pea     ($5E).w
+03127E4A                 pea     (1).w
+03127E4E                 bsr.l   sub_30D55CC
+03127E54                 addq.w  #8,sp
+03127E56                 addq.w  #4,sp
+03127E58                 lea     var_244(a6),a2
+03127E5C                 move.l  a2,-(sp)
+03127E5E                 bsr.w   sub_31282FC
+03127E62                 move.l  a2,-(sp)
+03127E64                 bsr.w   sub_31283DA
+03127E68                 addq.w  #4,sp
+03127E6A                 move.l  a2,(sp)
+03127E6C                 pea     ($66).w
+03127E70                 pea     (1).w
+03127E74                 bsr.l   sub_30D55CC
+03127E7A                 addq.w  #8,sp
+03127E7C                 move.l  a2,(sp)
+03127E7E                 bsr.w   sub_312852C
+03127E82                 pea     aEnd_1          ; "\n!\nend\n"
+03127E86                 move.l  a2,-(sp)
+03127E88                 bsr.w   sub_312855A
+03127E8C                 movea.l ($37898).l,a0
+03127E92                 move.l  $150(a0),d0
+03127E96                 andi.l  #$8020280,d0
+03127E9C                 addq.w  #8,sp
+03127E9E                 addq.w  #4,sp
+03127EA0                 beq.s   loc_3127EBC
+03127EA2                 btst    #3,$150(a0)
+03127EA8                 beq.w   loc_3127F40
+03127EAC                 pea     aConfigurationA ; "\n\nConfiguration aborted, no changes mad"...
+03127EB0                 bsr.l   sub_30E928E
+03127EB6                 addq.w  #4,sp
+03127EB8                 bra.w   loc_3127F40
+03127EBC ; ---------------------------------------------------------------------------
+03127EBC
+03127EBC loc_3127EBC:                            ; CODE XREF: resolve_all_protocols+298j
+03127EBC                 clr.l   -(sp)
+03127EBE                 bsr.l   sub_30E9E40
+03127EC4                 pea     aTheFollowingCo ; "\n\nThe following configuration command s"...
+03127EC8                 bsr.l   sub_30E928E
+03127ECE                 movea.l a3,a2
+03127ED0                 addq.w  #8,sp
+03127ED2                 tst.b   (a3)
+03127ED4                 beq.s   loc_3127EE8
+03127ED6
+03127ED6 loc_3127ED6:                            ; CODE XREF: resolve_all_protocols+2DEj
+03127ED6                 move.b  (a2)+,d1
+03127ED8                 extb.l  d1
+03127EDA                 move.l  d1,-(sp)
+03127EDC                 bsr.l   sub_30E9312
+03127EE2                 addq.w  #4,sp
+03127EE4                 tst.b   (a2)
+03127EE6                 bne.s   loc_3127ED6
+03127EE8
+03127EE8 loc_3127EE8:                            ; CODE XREF: resolve_all_protocols+2CCj
+03127EE8                 bsr.l   sub_30E9EAA
+03127EEE                 clr.l   -(sp)
+03127EF0                 clr.l   -(sp)
+03127EF2                 pea     aUseThisConfigu ; "Use this configuration"
+03127EF6                 bsr.l   sub_30DC1D2
+03127EFC                 addq.w  #8,sp
+03127EFE                 addq.w  #4,sp
+03127F00                 tst.l   d0
+03127F02                 beq.s   loc_3127F40
+03127F04                 pea     ($F).w
+03127F08                 pea     (5).w
+03127F0C                 pea     (1).w
+03127F10                 move.l  a3,-(sp)
+03127F12                 bsr.l   sub_311D326
+03127F18                 pea     ($F).w
+03127F1C                 pea     (1).w
+03127F20                 bsr.l   sub_30F106C
+03127F26                 pea     ($7D0).w
+03127F2A                 bsr.l   sub_310DD58
+03127F30                 move.l  ($A378).l,-(sp)
+03127F36                 bsr.l   sub_30E928E
+03127F3C                 adda.w  #$20,sp
+03127F40
+03127F40 loc_3127F40:                            ; CODE XREF: resolve_all_protocols+2A0j
+03127F40                                         ; resolve_all_protocols+2B0j ...
+03127F40                 move.l  a3,-(sp)
+03127F42                 bsr.l   sub_30CBE34
+03127F48
+03127F48 loc_3127F48:                            ; CODE XREF: resolve_all_protocols+64j
+03127F48                                         ; resolve_all_protocols+A2j ...
+03127F48                 bsr.s   sub_3127F64
+03127F4A                 movea.l var_24C(a6),a2
+03127F4E                 movea.l var_248(a6),a3
+03127F52                 unlk    a6
+03127F54                 rts
+03127F54 ; End of function resolve_all_protocols
+03127F54
+030DC1D2
+030DC1D2 ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+030DC1D2
+030DC1D2 ; Attributes: bp-based frame
+030DC1D2
+030DC1D2 yes_or_no:                              ; CODE XREF: resolve_all_protocols+54p
+030DC1D2                                         ; resolve_all_protocols+B2p ...
+030DC1D2
+030DC1D2 var_74          = -$74
+030DC1D2 var_64          = -$64
+030DC1D2 arg_0           =  8
+030DC1D2 arg_4           =  $C
+030DC1D2 arg_8           =  $10
+030DC1D2
+030DC1D2                 link    a6,#-$64
+030DC1D6                 movem.l d2-d4/a2,-(sp)
+030DC1DA                 move.l  arg_0(a6),d3
+030DC1DE                 move.l  arg_4(a6),d4
+030DC1E2                 move.l  arg_8(a6),d2
+030DC1E6                 bra.w   loc_30DC29C
+030DC1EA ; ---------------------------------------------------------------------------
+030DC1EA
+030DC1EA loc_30DC1EA:                            ; CODE XREF: yes_or_no+D6j
+030DC1EA                 tst.l   d3
+030DC1EC                 beq.s   loc_30DC21C
+030DC1EE                 tst.l   d2
+030DC1F0                 beq.s   loc_30DC204
+030DC1F2                 move.l  #aNo,d0         ; "no"
+030DC1F8                 tst.l   d4
+030DC1FA                 beq.s   loc_30DC20A
+030DC1FC                 move.l  #aYes,d0        ; "yes"
+030DC202                 bra.s   loc_30DC20A
+030DC204 ; ---------------------------------------------------------------------------
+030DC204
+030DC204 loc_30DC204:                            ; CODE XREF: yes_or_no+1Ej
+030DC204                 move.l  #aYesNo,d0      ; "yes/no"
+030DC20A
+030DC20A loc_30DC20A:                            ; CODE XREF: yes_or_no+28j
+030DC20A                                         ; yes_or_no+30j
+030DC20A                 move.l  d0,-(sp)
+030DC20C                 move.l  d3,-(sp)
+030DC20E                 pea     aS?S            ; "\n%s? [%s]: "
+030DC212                 bsr.l   printf
+030DC218                 addq.w  #8,sp
+030DC21A                 addq.w  #4,sp
+030DC21C
+030DC21C loc_30DC21C:                            ; CODE XREF: yes_or_no+1Aj
+030DC21C                 pea     ($64).w
+030DC220                 pea     var_64(a6)
+030DC224                 bsr.l   rdtty
+030DC22A                 addq.w  #8,sp
+030DC22C                 tst.l   d0
+030DC22E                 beq.s   loc_30DC2AC
+030DC230                 pea     var_64(a6)
+030DC234                 bsr.w   sub_30DB7E0
+030DC238                 movea.l d0,a2
+030DC23A                 addq.w  #4,sp
+030DC23C                 tst.l   d2
+030DC23E                 beq.s   loc_30DC250
+030DC240                 move.l  a2,-(sp)
+030DC242                 bsr.w   sub_30DB898
+030DC246                 addq.w  #4,sp
+030DC248                 tst.l   d0
+030DC24A                 beq.s   loc_30DC250
+030DC24C                 move.l  d4,d0
+030DC24E                 bra.s   loc_30DC2AE
+030DC250 ; ---------------------------------------------------------------------------
+030DC250
+030DC250 loc_30DC250:                            ; CODE XREF: yes_or_no+6Cj
+030DC250                                         ; yes_or_no+78j
+030DC250                 move.b  (a2),d1
+030DC252                 move.b  d1,d0
+030DC254                 addi.b  #$BF,d0
+030DC258                 cmpi.b  #$19,d0
+030DC25C                 bhi.s   loc_30DC266
+030DC25E                 move.b  d1,d0
+030DC260                 addi.b  #$20,d0
+030DC264                 bra.s   loc_30DC268
+030DC266 ; ---------------------------------------------------------------------------
+030DC266
+030DC266 loc_30DC266:                            ; CODE XREF: yes_or_no+8Aj
+030DC266                 move.b  d1,d0
+030DC268
+030DC268 loc_30DC268:                            ; CODE XREF: yes_or_no+92j
+030DC268                 cmpi.b  #$79,d0
+030DC26C                 bne.s   loc_30DC272
+030DC26E                 moveq   #1,d0
+030DC270                 bra.s   loc_30DC2AE
+030DC272 ; ---------------------------------------------------------------------------
+030DC272
+030DC272 loc_30DC272:                            ; CODE XREF: yes_or_no+9Aj
+030DC272                 move.b  (a2),d1
+030DC274                 move.b  d1,d0
+030DC276                 addi.b  #$BF,d0
+030DC27A                 cmpi.b  #$19,d0
+030DC27E                 bhi.s   loc_30DC288
+030DC280                 move.b  d1,d0
+030DC282                 addi.b  #$20,d0
+030DC286                 bra.s   loc_30DC28A
+030DC288 ; ---------------------------------------------------------------------------
+030DC288
+030DC288 loc_30DC288:                            ; CODE XREF: yes_or_no+ACj
+030DC288                 move.b  d1,d0
+030DC28A
+030DC28A loc_30DC28A:                            ; CODE XREF: yes_or_no+B4j
+030DC28A                 cmpi.b  #$6E,d0
+030DC28E                 beq.s   loc_30DC2AC
+030DC290                 pea     aPleaseAnswerYe ; "\n%% Please answer 'yes' or 'no'."
+030DC294                 bsr.l   printf
+030DC29A                 addq.w  #4,sp
+030DC29C
+030DC29C loc_30DC29C:                            ; CODE XREF: yes_or_no+14j
+030DC29C                 movea.l ($37898).l,a0
+030DC2A2                 btst    #3,$150(a0)
+030DC2A8                 beq.w   loc_30DC1EA
+030DC2AC
+030DC2AC loc_30DC2AC:                            ; CODE XREF: yes_or_no+5Cj
+030DC2AC                                         ; yes_or_no+BCj
+030DC2AC                 clr.l   d0
+030DC2AE
+030DC2AE loc_30DC2AE:                            ; CODE XREF: yes_or_no+7Cj
+030DC2AE                                         ; yes_or_no+9Ej
+030DC2AE                 movem.l var_74(a6),d2-d4/a2
+030DC2B4                 unlk    a6
+030DC2B6                 rts
+030DC2B6 ; End of function yes_or_no
+030DC2B6
+030DEE40 ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+030DEE40
+030DEE40 ; Attributes: bp-based frame
+030DEE40
+030DEE40 rdtty:                                  ; CODE XREF: yes_or_no+52p
+030DEE40                                         ; sub_31273FA+60p
+030DEE40
+030DEE40 arg_0           =  8
+030DEE40 arg_4           =  $C
+030DEE40
+030DEE40                 link    a6,#-4
+030DEE44                 movea.l arg_0(a6),a0
+030DEE48                 clr.b   (a0)
+030DEE4A                 pea     word_30DD342
+030DEE4E                 pea     (1).w
+030DEE52                 pea     -1(a6)
+030DEE56                 pea     word_30DEE3C
+030DEE5A                 move.l  arg_4(a6),-(sp)
+030DEE5E                 move.l  a0,-(sp)
+030DEE60                 bsr.w   readline
+030DEE64                 unlk    a6
+030DEE66                 rts
+030DEE66 ; End of function rdtty
+030DEE66

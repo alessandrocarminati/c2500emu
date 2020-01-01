@@ -1,0 +1,144 @@
+; testing all addressing mode
+
+; values
+            move.l     #$FFFFFF80, d0
+            move.b     #$A5, d0
+            cmp.b      #$A5, d0
+            beq        MoveOK001
+            illegal                   ;the byte in d0 differs from which is been loaded
+MoveOK001:  cmp.l      #$ffffffA5, d0
+            beq        MoveOK002
+            illegal                   ;When Dr register is loaded with a Byte value the MSBs remains unchanged
+
+;flags
+MoveOK002:  move       #$1f,CCR       ;set flags to 1s
+            move.b     #0,d0
+            bne        MoveEr001
+            bmi        MoveEr001
+            bcc        MoveOK003            
+MoveEr001:  illegal                   ;D0 is been loaded with 0 and Flags must be affected
+MoveOK003:  move       #0,CCR         ;set flags to 0s
+            move.b     #$CF,d0
+            beq        MoveEr002
+            bpl        MoveEr002
+            bcc        MoveOK004            
+MoveEr002:  illegal                   ;D0 is been loaded with 0 and Flags must be affected
+
+
+;values
+MoveOK004:  move.l     #$ffff8000, d0
+            move.w     #$A55A, d0
+            cmp.w      #$A55A, d0
+            beq        MoveOK005
+            illegal                   ;the word in d0 differs from which is been loaded
+MoveOK005:  cmp.l      #$ffffA55A, d0
+            beq        MoveOK006
+            illegal                   ;When Dr register is loaded with a WORD value the MSBs remains unchanged
+MoveOK006:  move.l     #$ffff8000, d0
+            move.l     #$A55AC33C, d0
+            cmp.l      #$A55AC33C, d0
+            beq        MoveOK007
+            illegal                   ;the longword in d0 differs from which is been loaded
+
+;testing the behavior on Dr registers
+MoveOK007:  move.l     #$a55ac33c, d0
+            move.l     #$a55ac33c, d1   
+            cmp.l      d0,d1 
+            bne.w      MoveEr003
+            move.l     #$a55ac33c, d2   
+            cmp.l      d0,d2 
+            bne.w      MoveEr003
+            move.l     #$a55ac33c, d3
+            cmp.l      d0,d3 
+            bne.w      MoveEr003
+            move.l     #$a55ac33c, d4
+            cmp.l      d0,d4 
+            bne.w      MoveEr003
+            move.l     #$a55ac33c, d5
+            cmp.l      d0,d5
+            bne.w      MoveEr003
+            move.l     #$a55ac33c, d6
+            cmp.l      d0,d6
+            bne.w      MoveEr003
+            move.l     #$a55ac33c, d7
+            cmp.l      d0,d7
+            beq.w      MoveOK008
+MoveEr003:  illegal                   ;move immediate value on one or more registers doen't work
+
+
+
+MoveOK008:  clr.l      d0
+            movea.l    d0, a0
+            movea.w    #$8000, a0          
+            move.l     #$FFFF8000, d0
+            cmp.l      a0,d0
+            beq.s      MoveOK009
+            illegal                   ;movea of word size are sign extended!
+MoveOK009:  move       #$FF, CCR
+            movea.l    #$800, a0
+            bcc.s      MoveEr004
+            beq.s      MoveEr004
+            bmi.s      MoveOK010
+MoveEr004:  illegal                   ;Movea do not affect flags at all
+
+
+MoveOK010:  bra         tuduki
+
+deta:       dc.b        $00 
+            dc.b        $01 
+            dc.b        $02 
+            dc.b        $03 
+            dc.b        $04 
+            dc.b        $05 
+            dc.b        $06 
+            dc.b        $07 
+            dc.b        $08 
+            dc.b        $09 
+            dc.b        $0a 
+            dc.b        $0b 
+            dc.b        $0c 
+            dc.b        $0d 
+            dc.b        $0e 
+            dc.b        $0f 
+            dc.b        $10 
+            dc.b        $11 
+            dc.b        $12 
+            dc.b        $13 
+            dc.b        $14 
+            dc.b        $15 
+            dc.b        $16 
+dataEnd:    dc.b        $17 
+
+tuduki:     movea.l     deta, a0
+            move.l      (a0), d0
+            cmp.l       #$00010203, d0
+            bne.w       MoveEr005
+            move.l      (a0)+, d0
+            move.l      (a0)+, d0
+            cmp.l       #$04050607, d0
+            bne.w       MoveEr005
+            move.l      -(a0), d0
+            move.l      -(a0), d0
+            cmp.l       #$00010203, d0
+            bne.w       MoveEr005
+            move.l      8(a0), d0
+            cmp.l       #$08090a0b, d0
+            bne.w       MoveEr005
+            movea.l     dataEnd, a0
+            move.l      -4(a0), d0
+            cmp.l       #$14151617, d0
+            bne.w       MoveEr005
+            movea.l     deta, a0
+            move.l      #2, d1
+            move.l      (4,a0,d1*2), d0
+            cmp.l       #$08090a0b, d0
+            bne.w       MoveEr005
+            move.l      #$fedcba9, d1
+            move.w      #2, d1
+            move.l      (-4,a0,d1.w*2), d0
+            cmp.l       #$08090a0b, d0
+            bne.w       MoveEr005
+            bra         MoveOK011
+MoveEr005:  illegal                   ;Houston, we got a problem.            
+MoveOK011:  bra         MoveOK011
+            

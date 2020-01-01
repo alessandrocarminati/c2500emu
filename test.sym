@@ -1,0 +1,29 @@
+Global symbols:
+
+Symbol Table:
+ #  Name                            OCLS  Base Len        Value         Line     File
+  0 MoveEr001                        PRI  CODE   W   0000000000000026      19   test.68a
+  1 MoveEr002                        PRI  CODE   W   0000000000000036      25   test.68a
+  2 MoveEr003                        PRI  CODE   W   0000000000000098      66   test.68a
+  3 MoveEr004                        PRI  CODE   W   00000000000000BA      82   test.68a
+  4 MoveEr005                        PRI  CODE   W   000000000000014C     142   test.68a
+  5 MoveOK001                        PRI  CODE   W   000000000000000E       9   test.68a
+  6 MoveOK002                        PRI  CODE   W   0000000000000018      14   test.68a
+  7 MoveOK003                        PRI  CODE   W   0000000000000028      20   test.68a
+  8 MoveOK004                        PRI  CODE   W   0000000000000038      29   test.68a
+  9 MoveOK005                        PRI  CODE   W   0000000000000046      34   test.68a
+ 10 MoveOK006                        PRI  CODE   W   0000000000000050      37   test.68a
+ 11 MoveOK007                        PRI  CODE   W   000000000000005E      44   test.68a
+ 12 MoveOK008                        PRI  CODE   W   000000000000009A      70   test.68a
+ 13 MoveOK009                        PRI  CODE   W   00000000000000AA      77   test.68a
+ 14 MoveOK010                        PRI  CODE   W   00000000000000BC      85   test.68a
+ 15 MoveOK011                        PRI  CODE   W   000000000000014E     143   test.68a
+ 16 dataEnd                          PRI  CODE   W   00000000000000D5     110   test.68a
+ 17 deta                             PRI  CODE   W   00000000000000BE      87   test.68a
+ 18 tuduki                           PRI  CODE   W   00000000000000D6     112   test.68a
+
+
+Local symbols:
+
+Macro Table:
+ #  Name                            Nargs  Line   File

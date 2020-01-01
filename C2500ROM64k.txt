@@ -1,0 +1,1995 @@
+000037FC                 clr.l   -(sp)           ; execption gate
+000037FE                 move.l  d0,-(sp)
+00003800                 move.l  d0,-(sp)
+00003802                 movem.l d1-d5/a0-a1,-(sp)
+00003806                 moveq   #$FFFFFFFF,d0
+00003808                 move.l  d0,$20(sp)
+0000380C                 addq.l  #1,(dword_101050).l
+00003812                 bfextu  $2E(sp){4:10},d0
+00003818                 movea.l ($11853C).l,a0
+0000381E                 addq.l  #1,(a0,d0.l)
+00003822                 move.l  d0,d1
+00003824                 lsl.l   #4,d1
+00003826                 lea     ($11753C).l,a0
+0000382C                 adda.l  d1,a0
+0000382E                 move.l  sp,-(sp)
+00003830                 move.l  8(a0),-(sp)
+00003834                 move.l  d0,-(sp)
+00003836                 movea.l (a0),a0
+00003838                 jsr     (a0)
+0000383A                 adda.l  #$C,sp
+00003840                 move.l  (dword_101050).l,d1
+00003846                 subq.l  #1,d1
+00003848                 bne.s   loc_3872
+0000384A                 bfextu  $28(sp){5:3},d0
+00003850                 bhi.s   loc_3872
+00003852
+00003852 loc_3852:                               ; CODE XREF: ROM:00003870j
+00003852                 move.l  (dword_101054).l,d0
+00003858                 and.l   (dword_101058).l,d0
+0000385E                 bne.s   loc_386A
+00003860                 clr.l   (dword_101050).l
+00003866                 bra.w   loc_375A
+0000386A ; ---------------------------------------------------------------------------
+0000386A
+0000386A loc_386A:                               ; CODE XREF: ROM:0000385Ej
+0000386A                 bsr.l   sub_9E80
+00003870                 bra.s   loc_3852
+00003872 ; ---------------------------------------------------------------------------
+00003872
+00003872 loc_3872:                               ; CODE XREF: ROM:00003848j
+00003872                                         ; ROM:00003850j
+00003872                 move.l  d1,(dword_101050).l
+00003878                 movem.l (sp)+,d1-d5/a0-a1
+0000387C                 move.l  (sp)+,d0
+0000387E                 addq.l  #4,sp
+00003880                 adda.l  (sp)+,sp
+00003882                 rte
+003D0548 ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+003D0548
+003D0548 ; Attributes: bp-based frame
+003D0548
+003D0548 runcmd:                                 ; CODE XREF: sub_3D0338+106p
+003D0548
+003D0548 var_1BC         = -$1BC
+003D0548 var_194         = -$194
+003D0548 var_C8          = -$C8
+003D0548 var_C4          = -$C4
+003D0548 arg_4           =  $C
+003D0548 arg_8           =  $10
+003D0548 arg_C           =  $14
+003D0548
+003D0548                 link    a6,#-$194
+003D054C                 movem.l d2-d7/a2-a5,-(sp)
+003D0550                 move.l  arg_4(a6),d6
+003D0554                 move.l  arg_8(a6),d5
+003D0558                 movea.l arg_C(a6),a5
+003D055C                 move.l  (a5),var_C8(a6)
+003D0560                 moveq   #1,d2
+003D0562                 moveq   #1,d3
+003D0564                 cmp.l   d2,d5
+003D0566                 ble.s   loc_3D05C8
+003D0568                 move.l  a6,d4
+003D056A                 addi.l  #$FFFFFE70,d4
+003D0570                 lea     4(a5),a3
+003D0574                 lea     var_C8(a6),a4
+003D0578                 lea     var_C4(a6),a2
+003D057C
+003D057C loc_3D057C:                             ; CODE XREF: runcmd+7Ej
+003D057C                 move.l  d4,-(sp)
+003D057E                 pea     (unk_32).w
+003D0582                 move.l  (a3),-(sp)
+003D0584                 bsr.l   sub_3D3158
+003D058A                 move.l  d0,d1
+003D058C                 lea     $C(sp),sp
+003D0590                 blt.w   loc_3D07DA
+003D0594                 move.l  d2,d0
+003D0596                 add.l   d1,d0
+003D0598                 moveq   #$31,d7 ; '1'
+003D059A                 cmp.l   d0,d7
+003D059C                 blt.w   loc_3D07B4
+003D05A0                 tst.l   d1
+003D05A2                 bne.s   loc_3D05A8
+003D05A4                 move.l  (a3),(a2)+
+003D05A6                 addq.l  #1,d2
+003D05A8
+003D05A8 loc_3D05A8:                             ; CODE XREF: runcmd+5Aj
+003D05A8                 clr.l   d0
+003D05AA                 cmp.l   d0,d1
+003D05AC                 ble.s   loc_3D05C0
+003D05AE                 movea.l d4,a1
+003D05B0                 lea     (a4,d2.l*4),a0
+003D05B4
+003D05B4 loc_3D05B4:                             ; CODE XREF: runcmd+76j
+003D05B4                 move.l  (a1)+,(a0)+
+003D05B6                 addq.l  #4,a2
+003D05B8                 addq.l  #1,d2
+003D05BA                 addq.l  #1,d0
+003D05BC                 cmp.l   d0,d1
+003D05BE                 bgt.s   loc_3D05B4
+003D05C0
+003D05C0 loc_3D05C0:                             ; CODE XREF: runcmd+64j
+003D05C0                 addq.l  #4,a3
+003D05C2                 addq.l  #1,d3
+003D05C4                 cmp.l   d3,d5
+003D05C6                 bgt.s   loc_3D057C
+003D05C8
+003D05C8 loc_3D05C8:                             ; CODE XREF: runcmd+1Ej
+003D05C8                 lea     var_C8(a6),a4
+003D05CC                 clr.l   (a4,d2.l*4)
+003D05D0                 tst.l   d6
+003D05D2                 bne.s   loc_3D05E2
+003D05D4                 clr.l   -(sp)
+003D05D6                 pea     (unk_11).w
+003D05DA                 bsr.l   signal
+003D05E0                 addq.l  #8,sp
+003D05E2
+003D05E2 loc_3D05E2:                             ; CODE XREF: runcmd+8Aj
+003D05E2                 moveq   #2,d0
+003D05E4                 trap    #0
+003D05E6                 cmpi.l  #$FFFFEFFF,d0
+003D05EC                 bls.s   loc_3D05F8
+003D05EE                 neg.l   d0
+003D05F0                 move.l  d0,(dword_3D840C).l
+003D05F6                 moveq   #$FFFFFFFF,d0
+003D05F8
+003D05F8 loc_3D05F8:                             ; CODE XREF: runcmd+A4j
+003D05F8                 move.l  d0,d2
+003D05FA                 bne.w   loc_3D06B6
+003D05FE                 move.l  (dword_3D8464).l,d0
+003D0604                 move.l  d0,d7
+003D0606                 subq.l  #1,d7
+003D0608                 move.l  d7,(dword_3D8464).l
+003D060E                 subq.l  #1,d0
+003D0610                 lea     (signal).l,a2
+003D0616                 bmi.s   loc_3D0650
+003D0618                 lea     (off_3D843C).l,a3
+003D061E
+003D061E loc_3D061E:                             ; CODE XREF: runcmd+106j
+003D061E                 move.l  (dword_3D8464).l,d0
+003D0624                 movea.l (a3,d0.l*4),a0
+003D0628                 cmpa.l  #off_3D8328,a0
+003D062E                 beq.s   loc_3D0642
+003D0630                 move.l  $14(a0),-(sp)
+003D0634                 bsr.l   sub_3D5A6C
+003D063A                 addq.l  #4,sp
+003D063C                 move.l  (dword_3D8464).l,d0
+003D0642
+003D0642 loc_3D0642:                             ; CODE XREF: runcmd+E6j
+003D0642                 move.l  d0,d7
+003D0644                 subq.l  #1,d7
+003D0646                 move.l  d7,(dword_3D8464).l
+003D064C                 subq.l  #1,d0
+003D064E                 bpl.s   loc_3D061E
+003D0650
+003D0650 loc_3D0650:                             ; CODE XREF: runcmd+CEj
+003D0650                 clr.l   -(sp)
+003D0652                 pea     (unk_2).w
+003D0656                 jsr     (a2)
+003D0658                 clr.l   -(sp)
+003D065A                 pea     (unk_3).w
+003D065E                 jsr     (a2)
+003D0660                 clr.l   -(sp)
+003D0662                 pea     (unk_11).w
+003D0666                 jsr     (a2)
+003D0668                 move.l  a4,-(sp)
+003D066A                 move.l  var_C8(a6),-(sp)
+003D066E                 bsr.l   execvp
+003D0674                 lea     $20(sp),sp
+003D0678                 move.l  (dword_3D840C).l,d0
+003D067E                 moveq   #2,d7
+003D0680                 cmp.l   d0,d7
+003D0682                 beq.s   loc_3D0692
+003D0684                 move.l  d0,-(sp)
+003D0686                 bsr.l   strerror
+003D068C                 addq.l  #4,sp
+003D068E                 move.l  a0,d0
+003D0690                 bra.s   loc_3D0698
+003D0692 ; ---------------------------------------------------------------------------
+003D0692
+003D0692 loc_3D0692:                             ; CODE XREF: runcmd+13Aj
+003D0692                 move.l  #aBadCommandOrFi,d0 ; "Bad command or file name"
+003D0698
+003D0698 loc_3D0698:                             ; CODE XREF: runcmd+148j
+003D0698                 move.l  d0,-(sp)
+003D069A                 move.l  var_C8(a6),-(sp)
+003D069E                 pea     (aSS).l         ; "%s: %s\n"
+003D06A4                 bsr.l   printf
+003D06AA                 clr.l   -(sp)
+003D06AC                 bsr.l   _exit
+003D06B2                 lea     $10(sp),sp
+003D06B6
+003D06B6 loc_3D06B6:                             ; CODE XREF: runcmd+B2j
+003D06B6                 tst.l   d2
+003D06B8                 bge.s   loc_3D06E0
+003D06BA                 move.l  #$10000000,-(sp)
+003D06C0                 pea     (catchchild).l
+003D06C6                 pea     (unk_11).w
+003D06CA                 bsr.l   __signal
+003D06D0                 pea     (aVforkFailed).l ; "vfork failed"
+003D06D6                 bsr.l   perror
+003D06DC                 bra.w   loc_3D07DA
+003D06E0 ; ---------------------------------------------------------------------------
+003D06E0
+003D06E0 loc_3D06E0:                             ; CODE XREF: runcmd+170j
+003D06E0                 tst.l   d6
+003D06E2                 beq.s   loc_3D06F6
+003D06E4                 move.l  d2,-(sp)
+003D06E6                 pea     (aD).l          ; "[%d]\n"
+003D06EC                 bsr.l   printf
+003D06F2                 bra.w   loc_3D07DA
+003D06F6 ; ---------------------------------------------------------------------------
+003D06F6
+003D06F6 loc_3D06F6:                             ; CODE XREF: runcmd+19Aj
+003D06F6                 tst.l   d2
+003D06F8                 beq.w   loc_3D07C8
+003D06FC                 clr.l   var_194(a6)
+003D0700                 clr.l   (dword_3D822A).l
+003D0706                 lea     (sub_3D60E4).l,a2
+003D070C                 bra.s   loc_3D0732
+003D070E ; ---------------------------------------------------------------------------
+003D070E
+003D070E loc_3D070E:                             ; CODE XREF: runcmd+1FCj
+003D070E                 cmp.l   d0,d2
+003D0710                 beq.s   loc_3D0732
+003D0712                 move.l  d0,-(sp)
+003D0714                 bsr.l   sub_3D5B80
+003D071A                 move.l  d0,-(sp)
+003D071C                 pea     (aShDChildDDied).l ; "sh %d: child %d died\n"
+003D0722                 pea     (off_3D8378).l
+003D0728                 bsr.l   fprintf
+003D072E                 lea     $10(sp),sp
+003D0732
+003D0732 loc_3D0732:                             ; CODE XREF: runcmd+1C4j
+003D0732                                         ; runcmd+1C8j ...
+003D0732                 clr.l   -(sp)
+003D0734                 clr.l   -(sp)
+003D0736                 pea     var_194(a6)
+003D073A                 move.l  d2,-(sp)
+003D073C                 jsr     (a2)
+003D073E                 lea     $10(sp),sp
+003D0742                 tst.l   d0
+003D0744                 bge.s   loc_3D070E
+003D0746                 moveq   #4,d7
+003D0748                 cmp.l   (dword_3D840C).l,d7
+003D074E                 beq.s   loc_3D0732
+003D0750                 move.l  #$10000000,-(sp)
+003D0756                 pea     (catchchild).l
+003D075C                 pea     (unk_11).w
+003D0760                 bsr.l   __signal
+003D0766                 moveq   #1,d7
+003D0768                 move.l  d7,(dword_3D822A).l
+003D076E                 move.b  var_194+3(a6),d1
+003D0772                 lea     $C(sp),sp
+003D0776                 beq.s   loc_3D07DA
+003D0778                 moveq   #$7F,d7 ; ''
+003D077A                 and.l   var_194(a6),d7
+003D077E                 move.l  d7,-(sp)
+003D0780                 move.l  #aKilled,d0     ; "killed"
+003D0786                 tst.b   d1
+003D0788                 bge.s   loc_3D0790
+003D078A                 move.l  #aCoreDumped,d0 ; "core dumped"
+003D0790
+003D0790 loc_3D0790:                             ; CODE XREF: runcmd+240j
+003D0790                 move.l  d0,-(sp)
+003D0792                 move.l  d2,-(sp)
+003D0794                 pea     (aPidDSSignalD).l ; "pid %d: %s (signal %d)\n"
+003D079A                 pea     (off_3D8378).l
+003D07A0                 bsr.l   fprintf
+003D07A6                 pea     (off_3D8378).l
+003D07AC                 bsr.l   fflush
+003D07B2                 bra.s   loc_3D07DA
+003D07B4 ; ---------------------------------------------------------------------------
+003D07B4
+003D07B4 loc_3D07B4:                             ; CODE XREF: runcmd+54j
+003D07B4                 pea     (aTooManyArgum_0).l ; "Too many arguments\n"
+003D07BA                 pea     (off_3D8378).l
+003D07C0                 bsr.l   fprintf
+003D07C6                 bra.s   loc_3D07DA
+003D07C8 ; ---------------------------------------------------------------------------
+003D07C8
+003D07C8 loc_3D07C8:                             ; CODE XREF: runcmd+1B0j
+003D07C8                 move.l  (a5),-(sp)
+003D07CA                 bsr.l   perror
+003D07D0                 pea     (unk_1).w
+003D07D4                 bsr.l   exit
+003D07DA
+003D07DA loc_3D07DA:                             ; CODE XREF: runcmd+48j
+003D07DA                                         ; runcmd+194j ...
+003D07DA                 movem.l var_1BC(a6),d2-d7/a2-a5
+003D07E0                 unlk    a6
+003D07E2                 rts
+003D07E2 ; End of function runcmd
+003D4828
+003D4828 ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+003D4828
+003D4828 ; Attributes: bp-based frame
+003D4828
+003D4828 fgets:                                  ; CODE XREF: readfile+C6p
+003D4828                                         ; ROM:003D2AE6p
+003D4828                                         ; DATA XREF: ...
+003D4828
+003D4828 var_10          = -$10
+003D4828 arg_0           =  8
+003D4828 arg_4           =  $C
+003D4828 arg_8           =  $10
+003D4828
+003D4828                 link    a6,#0
+003D482C                 movem.l d2-d3/a2-a3,-(sp)
+003D4830                 movea.l arg_0(a6),a3
+003D4834                 movea.l arg_8(a6),a2
+003D4838                 move.l  a3,d3
+003D483A                 move.l  arg_4(a6),d2
+003D483E                 beq.s   loc_3D4874
+003D4840
+003D4840 loc_3D4840:                             ; CODE XREF: fgets+4Aj
+003D4840                 movea.l (a2),a0
+003D4842                 cmpa.l  4(a2),a0
+003D4846                 bcs.s   loc_3D4854
+003D4848                 move.l  a2,-(sp)
+003D484A                 bsr.l   getc
+003D4850                 addq.l  #4,sp
+003D4852                 bra.s   loc_3D485A
+003D4854 ; ---------------------------------------------------------------------------
+003D4854
+003D4854 loc_3D4854:                             ; CODE XREF: fgets+1Ej
+003D4854                 clr.l   d0
+003D4856                 move.b  (a0),d0
+003D4858                 addq.l  #1,(a2)
+003D485A
+003D485A loc_3D485A:                             ; CODE XREF: fgets+2Aj
+003D485A                 moveq   #$FFFFFFFF,d1
+003D485C                 cmp.l   d0,d1
+003D485E                 bne.s   loc_3D4868
+003D4860                 cmp.l   a3,d3
+003D4862                 bne.s   loc_3D4874
+003D4864                 suba.l  a0,a0
+003D4866                 bra.s   loc_3D4884
+003D4868 ; ---------------------------------------------------------------------------
+003D4868
+003D4868 loc_3D4868:                             ; CODE XREF: fgets+36j
+003D4868                 move.b  d0,(a3)+
+003D486A                 moveq   #$A,d1
+003D486C                 cmp.l   d0,d1
+003D486E                 beq.s   loc_3D4874
+003D4870                 subq.l  #1,d2
+003D4872                 bne.s   loc_3D4840
+003D4874
+003D4874 loc_3D4874:                             ; CODE XREF: fgets+16j
+003D4874                                         ; fgets+3Aj ...
+003D4874                 clr.b   (a3)
+003D4876                 btst    #1,$1A(a2)
+003D487C                 seq     d0
+003D487E                 extb.l  d0
+003D4880                 and.l   d0,d3
+003D4882                 movea.l d3,a0
+003D4884
+003D4884 loc_3D4884:                             ; CODE XREF: fgets+3Ej
+003D4884                 move.l  a0,d0
+003D4886                 movem.l var_10(a6),d2-d3/a2-a3
+003D488C                 unlk    a6
+003D488E                 rts
+003D0172 readfile:                               ; CODE XREF: sub_3D0080:loc_3D0162p
+003D0172                                         ; ROM:003D0870p
+003D0172
+003D0172 var_1C          = -$1C
+003D0172 arg_0           =  8
+003D0172
+003D0172                 link    a6,#0
+003D0176                 movem.l d2-d4/a2-a5,-(sp)
+003D017A                 movea.l arg_0(a6),a3
+003D017E                 moveq   #9,d4
+003D0180                 cmp.l   (dword_3D8464).l,d4
+003D0186                 bge.s   loc_3D019E
+003D0188                 pea     (aTooManySourceF).l ; "Too many source files\n"
+003D018E                 pea     (off_3D8378).l
+003D0194                 bsr.l   fprintf
+003D019A                 bra.w   loc_3D032E
+003D019E ; ---------------------------------------------------------------------------
+003D019E
+003D019E loc_3D019E:                             ; CODE XREF: readfile+14j
+003D019E                 lea     (off_3D8328).l,a2
+003D01A4                 move.l  a2,d2
+003D01A6                 tst.l   a3
+003D01A8                 beq.s   loc_3D01E0
+003D01AA                 pea     (aR_4).l        ; "r"
+003D01B0                 clr.l   -(sp)
+003D01B2                 pea     ($FFFFFFFF).w
+003D01B6                 move.l  a3,-(sp)
+003D01B8                 bsr.l   sub_3D4A88
+003D01BE                 movea.l a0,a2
+003D01C0                 lea     $10(sp),sp
+003D01C4                 tst.l   a2
+003D01C6                 bne.s   loc_3D01E0
+003D01C8                 move.l  a3,-(sp)
+003D01CA                 bsr.l   perror
+003D01D0                 bra.w   loc_3D032E
+003D01D4 ; ---------------------------------------------------------------------------
+003D01D4
+003D01D4 loc_3D01D4:                             ; CODE XREF: readfile+B8j
+003D01D4                 move.l  a2,-(sp)
+003D01D6                 bsr.l   sub_3D4C38
+003D01DC                 bra.w   loc_3D0328
+003D01E0 ; ---------------------------------------------------------------------------
+003D01E0
+003D01E0 loc_3D01E0:                             ; CODE XREF: readfile+36j
+003D01E0                                         ; readfile+54j
+003D01E0                 move.l  (dword_3D8464).l,d0
+003D01E6                 lea     (off_3D843C).l,a0
+003D01EC                 move.l  a2,(a0,d0.l*4)
+003D01F0                 addq.l  #1,(dword_3D8464).l
+003D01F6                 move.l  $14(a2),-(sp)
+003D01FA                 bsr.l   sub_3D5994
+003D0200                 move.l  d0,d3
+003D0202                 addq.l  #4,sp
+003D0204                 lea     (fflush).l,a5
+003D020A
+003D020A loc_3D020A:                             ; CODE XREF: readfile+F4j
+003D020A                                         ; readfile+162j ...
+003D020A                 pea     (stdout).l
+003D0210                 jsr     (a5)
+003D0212                 addq.l  #4,sp
+003D0214                 cmp.l   a2,d2
+003D0216                 bne.s   loc_3D021C
+003D0218                 bsr.w   showprompt
+003D021C
+003D021C loc_3D021C:                             ; CODE XREF: readfile+A4j
+003D021C                 tst.l   (dword_3D9009).l
+003D0222                 beq.s   loc_3D022C
+003D0224                 tst.l   d3
+003D0226                 bne.s   loc_3D022C
+003D0228                 cmp.l   a2,d2
+003D022A                 bne.s   loc_3D01D4
+003D022C
+003D022C loc_3D022C:                             ; CODE XREF: readfile+B0j
+003D022C                                         ; readfile+B4j
+003D022C                 move.l  a2,-(sp)
+003D022E                 pea     (off_FF).w
+003D0232                 pea     (buf).l         ; "sdc"
+003D0238                 bsr.l   fgets
+003D023E                 lea     $C(sp),sp
+003D0242                 tst.l   a0
+003D0244                 bne.s   loc_3D0268
+003D0246                 move.l  $18(a2),d0
+003D024A                 btst    #9,d0
+003D024E                 beq.w   loc_3D030A
+003D0252                 moveq   #4,d4
+003D0254                 cmp.l   (dword_3D840C).l,d4
+003D025A                 bne.w   loc_3D02E6
+003D025E                 andi.w  #$FCFF,d0
+003D0262                 move.l  d0,$18(a2)
+003D0266                 bra.s   loc_3D020A
+003D0268 ; ---------------------------------------------------------------------------
+003D0268
+003D0268 loc_3D0268:                             ; CODE XREF: readfile+D2j
+003D0268                 pea     (buf).l         ; "sdc"
+003D026E                 bsr.l   strlen
+003D0274                 move.l  d0,d1
+003D0276                 subq.l  #1,d1
+003D0278                 lea     (buf).l,a3      ; "sdc"
+003D027E                 movea.l a3,a4
+003D0280                 addq.l  #4,sp
+003D0282                 cmpi.b  #$A,(a3,d1.l)
+003D0288                 bne.s   loc_3D028C
+003D028A                 move.l  d1,d0
+003D028C
+003D028C loc_3D028C:                             ; CODE XREF: readfile+116j
+003D028C                 tst.l   d0
+003D028E                 ble.s   loc_3D02AA
+003D0290                 movea.l a3,a1
+003D0292
+003D0292 loc_3D0292:                             ; CODE XREF: readfile+136j
+003D0292                 movea.l d0,a0
+003D0294                 subq.l  #1,a0
+003D0296                 move.b  (a0,a1.l),d1
+003D029A                 cmpi.b  #$20,d1 ; ' '
+003D029E                 beq.s   loc_3D02A6
+003D02A0                 cmpi.b  #9,d1
+003D02A4                 bne.s   loc_3D02AA
+003D02A6
+003D02A6 loc_3D02A6:                             ; CODE XREF: readfile+12Cj
+003D02A6                 move.l  a0,d0
+003D02A8                 bgt.s   loc_3D0292
+003D02AA
+003D02AA loc_3D02AA:                             ; CODE XREF: readfile+11Cj
+003D02AA                                         ; readfile+132j
+003D02AA                 clr.b   (a4,d0.l)
+003D02AE                 cmp.l   a2,d2
+003D02B0                 beq.s   loc_3D02C2
+003D02B2                 move.l  a3,-(sp)
+003D02B4                 pea     (aCommandS).l   ; "Command: %s\n"
+003D02BA                 bsr.l   printf
+003D02C0                 addq.l  #8,sp
+003D02C2
+003D02C2 loc_3D02C2:                             ; CODE XREF: readfile+13Ej
+003D02C2                 movea.l a3,a0
+003D02C4                 bra.s   loc_3D02C8
+003D02C6 ; ---------------------------------------------------------------------------
+003D02C6
+003D02C6 loc_3D02C6:                             ; CODE XREF: readfile+15Cj
+003D02C6                 addq.l  #1,a0
+003D02C8
+003D02C8 loc_3D02C8:                             ; CODE XREF: readfile+152j
+003D02C8                 move.b  (a0),d0
+003D02CA                 cmpi.b  #$20,d0 ; ' '
+003D02CE                 beq.s   loc_3D02C6
+003D02D0                 cmpi.b  #$23,d0 ; '#'
+003D02D4                 beq.w   loc_3D020A
+003D02D8                 pea     (buf).l         ; "sdc"
+003D02DE                 bsr.s   command
+003D02E0                 addq.l  #4,sp
+003D02E2                 bra.w   loc_3D020A
+003D02E6 ; ---------------------------------------------------------------------------
+003D02E6
+003D02E6 loc_3D02E6:                             ; CODE XREF: readfile+E8j
+003D02E6                 btst    #9,d0
+003D02EA                 beq.s   loc_3D030A
+003D02EC                 pea     (aReadingCommand).l ; "Reading command line"
+003D02F2                 bsr.l   perror
+003D02F8                 addq.l  #4,sp
+003D02FA                 cmp.l   a2,d2
+003D02FC                 bne.s   loc_3D030A
+003D02FE                 pea     (unk_1).w
+003D0302                 bsr.l   exit
+003D0308                 addq.l  #4,sp
+003D030A
+003D030A loc_3D030A:                             ; CODE XREF: readfile+DCj
+003D030A                                         ; readfile+178j ...
+003D030A                 andi.w  #$FCFF,$1A(a2)
+003D0310                 cmp.l   a2,d2
+003D0312                 beq.s   loc_3D0328
+003D0314                 move.l  a2,-(sp)
+003D0316                 bsr.l   sub_3D4C38
+003D031C                 pea     (aExecutionFinis).l ; "Execution Finished, Exiting\n"
+003D0322                 bsr.l   printf
+003D0328
+003D0328 loc_3D0328:                             ; CODE XREF: readfile+6Aj
+003D0328                                         ; readfile+1A0j
+003D0328                 subq.l  #1,(dword_3D8464).l
+003D032E
+003D032E loc_3D032E:                             ; CODE XREF: readfile+28j
+003D032E                                         ; readfile+5Ej
+003D032E                 movem.l var_1C(a6),d2-d4/a2-a5
+003D0334                 unlk    a6
+003D0336                 rts
+003D4828
+003D4828 ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+003D4828
+003D4828 ; Attributes: bp-based frame
+003D4828
+003D4828 fgets:                                  ; CODE XREF: readfile+C6p
+003D4828                                         ; ROM:003D2AE6p
+003D4828                                         ; DATA XREF: ...
+003D4828
+003D4828 var_10          = -$10
+003D4828 arg_0           =  8
+003D4828 arg_4           =  $C
+003D4828 arg_8           =  $10
+003D4828
+003D4828                 link    a6,#0
+003D482C                 movem.l d2-d3/a2-a3,-(sp)
+003D4830                 movea.l arg_0(a6),a3
+003D4834                 movea.l arg_8(a6),a2
+003D4838                 move.l  a3,d3
+003D483A                 move.l  arg_4(a6),d2
+003D483E                 beq.s   loc_3D4874
+003D4840
+003D4840 loc_3D4840:                             ; CODE XREF: fgets+4Aj
+003D4840                 movea.l (a2),a0
+003D4842                 cmpa.l  4(a2),a0
+003D4846                 bcs.s   loc_3D4854
+003D4848                 move.l  a2,-(sp)
+003D484A                 bsr.l   getc
+003D4850                 addq.l  #4,sp
+003D4852                 bra.s   loc_3D485A
+003D4854 ; ---------------------------------------------------------------------------
+003D4854
+003D4854 loc_3D4854:                             ; CODE XREF: fgets+1Ej
+003D4854                 clr.l   d0
+003D4856                 move.b  (a0),d0
+003D4858                 addq.l  #1,(a2)
+003D485A
+003D485A loc_3D485A:                             ; CODE XREF: fgets+2Aj
+003D485A                 moveq   #$FFFFFFFF,d1
+003D485C                 cmp.l   d0,d1
+003D485E                 bne.s   loc_3D4868
+003D4860                 cmp.l   a3,d3
+003D4862                 bne.s   loc_3D4874
+003D4864                 suba.l  a0,a0
+003D4866                 bra.s   loc_3D4884
+003D4868 ; ---------------------------------------------------------------------------
+003D4868
+003D4868 loc_3D4868:                             ; CODE XREF: fgets+36j
+003D4868                 move.b  d0,(a3)+
+003D486A                 moveq   #$A,d1
+003D486C                 cmp.l   d0,d1
+003D486E                 beq.s   loc_3D4874
+003D4870                 subq.l  #1,d2
+003D4872                 bne.s   loc_3D4840
+003D4874
+003D4874 loc_3D4874:                             ; CODE XREF: fgets+16j
+003D4874                                         ; fgets+3Aj ...
+003D4874                 clr.b   (a3)
+003D4876                 btst    #1,$1A(a2)
+003D487C                 seq     d0
+003D487E                 extb.l  d0
+003D4880                 and.l   d0,d3
+003D4882                 movea.l d3,a0
+003D4884
+003D4884 loc_3D4884:                             ; CODE XREF: fgets+3Ej
+003D4884                 move.l  a0,d0
+003D4886                 movem.l var_10(a6),d2-d3/a2-a3
+003D488C                 unlk    a6
+003D488E                 rts
+003D488E ; End of function fgets
+003D46A8
+003D46A8 ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+003D46A8
+003D46A8 ; Attributes: bp-based frame
+003D46A8
+003D46A8 getc:                                   ; CODE XREF: ROM:003D15CAp
+003D46A8                                         ; fgets+22p
+003D46A8
+003D46A8 var_4           = -4
+003D46A8 arg_0           =  8
+003D46A8
+003D46A8                 link    a6,#0
+003D46AC                 move.l  a2,-(sp)
+003D46AE                 movea.l arg_0(a6),a2
+003D46B2                 bsr.l   sub_3D44FC
+003D46B8                 tst.b   $1B(a2)
+003D46BC                 bge.s   loc_3D46C8
+003D46BE                 move.l  a2,-(sp)
+003D46C0                 bsr.l   fflush
+003D46C6                 addq.l  #4,sp
+003D46C8
+003D46C8 loc_3D46C8:                             ; CODE XREF: getc+14j
+003D46C8                 move.l  $18(a2),d0
+003D46CC                 andi.l  #$310,d0
+003D46D2                 moveq   #$10,d1
+003D46D4                 cmp.l   d0,d1
+003D46D6                 bne.s   loc_3D4704
+003D46D8                 movea.l (a2),a0
+003D46DA                 cmpa.l  4(a2),a0
+003D46DE                 bcs.s   loc_3D471C
+003D46E0                 move.l  $C(a2),d0
+003D46E4                 move.l  d0,4(a2)
+003D46E8                 move.l  d0,(a2)
+003D46EA                 move.l  a2,-(sp)
+003D46EC                 move.l  $10(a2),d1
+003D46F0                 sub.l   d0,d1
+003D46F2                 move.l  d1,-(sp)
+003D46F4                 pea     (unk_1).w
+003D46F8                 move.l  d0,-(sp)
+003D46FA                 bsr.l   sub_3D48EC
+003D4700                 tst.l   d0
+003D4702                 bne.s   loc_3D4708
+003D4704
+003D4704 loc_3D4704:                             ; CODE XREF: getc+2Ej
+003D4704                 moveq   #$FFFFFFFF,d0
+003D4706                 bra.s   loc_3D4722
+003D4708 ; ---------------------------------------------------------------------------
+003D4708
+003D4708 loc_3D4708:                             ; CODE XREF: getc+5Aj
+003D4708                 add.l   d0,4(a2)
+003D470C                 moveq   #$40,d0 ; '@'
+003D470E                 or.l    $18(a2),d0
+003D4712                 andi.w  #$FBFF,d0
+003D4716                 move.l  d0,$18(a2)
+003D471A                 movea.l (a2),a0
+003D471C
+003D471C loc_3D471C:                             ; CODE XREF: getc+36j
+003D471C                 clr.l   d0
+003D471E                 move.b  (a0),d0
+003D4720                 addq.l  #1,(a2)
+003D4722
+003D4722 loc_3D4722:                             ; CODE XREF: getc+5Ej
+003D4722                 movea.l var_4(a6),a2
+003D4726                 unlk    a6
+003D4728                 rts
+003D4728 ; End of function getc
+003D4728
+003D48EC ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+003D48EC
+003D48EC ; Attributes: bp-based frame
+003D48EC
+003D48EC sagasuchuu:                             ; CODE XREF: ROM:003D29D2p
+003D48EC                                         ; getc+52p
+003D48EC                                         ; DATA XREF: ...
+003D48EC
+003D48EC var_1C          = -$1C
+003D48EC arg_0           =  8
+003D48EC arg_4           =  $C
+003D48EC arg_8           =  $10
+003D48EC arg_C           =  $14
+003D48EC
+003D48EC                 link    a6,#0
+003D48F0                 movem.l d2-d6/a2-a3,-(sp)
+003D48F4                 movea.l arg_0(a6),a3
+003D48F8                 move.l  arg_4(a6),d5
+003D48FC                 movea.l arg_C(a6),a2
+003D4900                 clr.l   d4
+003D4902                 bsr.l   sub_3D44FC
+003D4908                 move.l  $18(a2),d2
+003D490C                 tst.b   d2
+003D490E                 bge.s   loc_3D491A
+003D4910                 move.l  a2,-(sp)
+003D4912                 bsr.l   fflush
+003D4918                 addq.l  #4,sp
+003D491A
+003D491A loc_3D491A:                             ; CODE XREF: sagasuchuu+22j
+003D491A                 andi.l  #$310,d2
+003D4920                 moveq   #$10,d6
+003D4922                 cmp.l   d2,d6
+003D4924                 beq.s   loc_3D492A
+003D4926                 clr.l   d0
+003D4928                 bra.s   loc_3D4998
+003D492A ; ---------------------------------------------------------------------------
+003D492A
+003D492A loc_3D492A:                             ; CODE XREF: sagasuchuu+38j
+003D492A                 move.l  d5,d3
+003D492C                 muls.l  arg_8(a6),d3
+003D4932                 move.l  (a2),d0
+003D4934                 move.l  4(a2),d2
+003D4938                 sub.l   d0,d2
+003D493A                 cmp.l   d2,d3
+003D493C                 bhi.s   loc_3D4950
+003D493E                 move.l  d3,-(sp)
+003D4940                 move.l  d0,-(sp)
+003D4942                 move.l  a3,-(sp)
+003D4944                 bsr.l   sub_3D5910
+003D494A                 add.l   d3,(a2)
+003D494C                 move.l  d3,d0
+003D494E                 bra.s   loc_3D4998
+003D4950 ; ---------------------------------------------------------------------------
+003D4950
+003D4950 loc_3D4950:                             ; CODE XREF: sagasuchuu+50j
+003D4950                 tst.l   d2
+003D4952                 ble.s   loc_3D4966
+003D4954                 move.l  d2,-(sp)
+003D4956                 move.l  d0,-(sp)
+003D4958                 move.l  a3,-(sp)
+003D495A                 bsr.l   sub_3D5910
+003D4960                 move.l  d2,d4
+003D4962                 lea     $C(sp),sp
+003D4966
+003D4966 loc_3D4966:                             ; CODE XREF: sagasuchuu+66j
+003D4966                 sub.l   d4,d3
+003D4968                 move.l  d3,-(sp)
+003D496A                 pea     (a3,d4.l)
+003D496E                 move.l  $14(a2),-(sp)
+003D4972                 bsr.l   sub_3D5DF8
+003D4978                 move.l  d0,d2
+003D497A                 bge.s   loc_3D4986
+003D497C                 ori.w   #$200,$1A(a2)
+003D4982                 clr.l   d2
+003D4984                 bra.s   loc_3D4990
+003D4986 ; ---------------------------------------------------------------------------
+003D4986
+003D4986 loc_3D4986:                             ; CODE XREF: sagasuchuu+8Ej
+003D4986                 tst.l   d2
+003D4988                 bne.s   loc_3D4990
+003D498A                 ori.w   #$100,$1A(a2)
+003D4990
+003D4990 loc_3D4990:                             ; CODE XREF: sagasuchuu+98j
+003D4990                                         ; sagasuchuu+9Cj
+003D4990                 move.l  d4,d0
+003D4992                 add.l   d2,d0
+003D4994                 divu.l  d5,d0
+003D4998
+003D4998 loc_3D4998:                             ; CODE XREF: sagasuchuu+3Cj
+003D4998                                         ; sagasuchuu+62j
+003D4998                 movem.l var_1C(a6),d2-d6/a2-a3
+003D499E                 unlk    a6
+003D49A0                 rts
+003D49A0 ; End of function sagasuchuu
+00002F04 loc_2F04:                               ; DATA XREF: sub_2FA8+ECo
+00002F04                 move.l  d3,-(sp)
+00002F06                 move.l  d2,-(sp)
+00002F08                 movea.l (off_593B0).l,a0
+00002F0E                 tst.l   a0
+00002F10                 beq.s   loc_2F14
+00002F12                 jsr     (a0)
+00002F14
+00002F14 loc_2F14:                               ; CODE XREF: ROM:00002F10j
+00002F14                 move.l  $14(sp),-(sp)
+00002F18                 bsr.l   sub_5838
+00002F1E                 addq.w  #4,sp
+00002F20                 moveq   #5,d3
+00002F22                 cmp.l   (dword_FE0EC).l,d3
+00002F28                 beq.s   loc_2FA2
+00002F2A                 move.l  (dword_59448).l,d0
+00002F30                 addi.l  #$294,d0
+00002F36                 cmp.l   (dword_118744).l,d0
+00002F3C                 bge.s   loc_2FA2
+00002F3E                 move.l  (off_FE0D8).l,d0
+00002F44                 move.l  d0,d2
+00002F46                 asr.l   #1,d2
+00002F48                 move.l  #unk_7A120,d0
+00002F4E                 sub.l   d2,d0
+00002F50                 move.l  (off_118748).l,d1
+00002F56                 cmp.l   d1,d0
+00002F58                 bge.s   loc_2FA2
+00002F5A                 move.l  d2,d0
+00002F5C                 addi.l  #unk_7A120,d0
+00002F62                 cmp.l   d1,d0
+00002F64                 ble.s   loc_2FA2
+00002F66                 move.l  (dword_118744).l,d0
+00002F6C                 movea.l (dword_593E4).l,a0
+00002F72                 tst.l   a0
+00002F74                 beq.s   loc_2F7E
+00002F76                 move.l  d0,-(sp)
+00002F78                 jsr     (a0)
+00002F7A                 addq.w  #4,sp
+00002F7C                 bra.s   loc_2F80
+00002F7E ; ---------------------------------------------------------------------------
+00002F7E
+00002F7E loc_2F7E:                               ; CODE XREF: ROM:00002F74j
+00002F7E                 moveq   #$FFFFFFFF,d0
+00002F80
+00002F80 loc_2F80:                               ; CODE XREF: ROM:00002F7Cj
+00002F80                 tst.l   d0
+00002F82                 bne.s   loc_2F90
+00002F84                 move.l  (dword_118744).l,(dword_59448).l
+00002F8E                 bra.s   loc_2FA2
+00002F90 ; ---------------------------------------------------------------------------
+00002F90
+00002F90 loc_2F90:                               ; CODE XREF: ROM:00002F82j
+00002F90                 move.l  (dword_118744).l,d3
+00002F96                 addi.l  #$FFFFFDA8,d3
+00002F9C                 move.l  d3,(dword_59448).l
+00002FA2
+00002FA2 loc_2FA2:                               ; CODE XREF: ROM:00002F28j
+00002FA2                                         ; ROM:00002F3Cj ...
+00002FA2                 move.l  (sp)+,d2
+00002FA4                 move.l  (sp)+,d3
+00002FA6                 rts
+0004C1DC
+0004C1DC ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+0004C1DC
+0004C1DC ; Attributes: bp-based frame
+0004C1DC
+0004C1DC sub_4C1DC:                              ; DATA XREF: sub_3C54+1Ao
+0004C1DC                                         ; ROM:off_593B0o
+0004C1DC
+0004C1DC var_108         = -$108
+0004C1DC var_102         = -$102
+0004C1DC var_1           = -1
+0004C1DC
+0004C1DC                 link    a6,#-$104
+0004C1E0                 move.l  a2,-(sp)
+0004C1E2                 movea.l (off_11470C).l,a2
+0004C1E8                 movea.l #$2120100,a1
+0004C1EE                 move.b  ($2120101).l,d0
+0004C1F4                 btst    #3,d0
+0004C1F8                 beq.s   loc_4C202
+0004C1FA                 move.b  ($212010F).l,var_1(a6)
+0004C202
+0004C202 loc_4C202:                              ; CODE XREF: sub_4C1DC+1Cj
+0004C202                 clr.l   d1
+0004C204                 move.b  ($2120101).l,d0
+0004C20A                 btst    #0,d0
+0004C20E                 beq.s   loc_4C226
+0004C210
+0004C210 loc_4C210:                              ; CODE XREF: sub_4C1DC+48j
+0004C210                 lea     (a6,d1.l),a0
+0004C214                 move.b  3(a1),-$102(a0)
+0004C21A                 addq.l  #1,d1
+0004C21C                 move.b  1(a1),d0
+0004C220                 btst    #0,d0
+0004C224                 bne.s   loc_4C210
+0004C226
+0004C226 loc_4C226:                              ; CODE XREF: sub_4C1DC+32j
+0004C226                 tst.l   d1
+0004C228                 beq.s   loc_4C23E
+0004C22A                 move.l  d1,-(sp)
+0004C22C                 clr.l   -(sp)
+0004C22E                 pea     var_102(a6)
+0004C232                 move.l  a2,-(sp)
+0004C234                 movea.l $CE(a2),a0
+0004C238                 jsr     (a0)
+0004C23A                 addq.w  #8,sp
+0004C23C                 addq.w  #8,sp
+0004C23E
+0004C23E loc_4C23E:                              ; CODE XREF: sub_4C1DC+4Cj
+0004C23E                 movea.l var_108(a6),a2
+0004C242                 unlk    a6
+0004C244                 rts
+0004C244 ; End of function sub_4C1DC
+0004C244
+0004C244 ; ---------------------------------------------------------------------------
+0004C246 aConsoleDuart:  dc.b 'Console duart',0
+0004F5E4                 link    a6,#-$44
+0004F5E8                 movem.l d2-d7/a2-a5,-(sp)
+0004F5EC                 movea.l 8(a6),a2
+0004F5F0                 move.l  $C(a6),d4
+0004F5F4                 move.l  $14(a6),d2
+0004F5F8                 clr.b   -$41(a6)
+0004F5FC                 movea.l $96A(a2),a1
+0004F600                 tst.l   a1
+0004F602                 beq.w   loc_4FEA4
+0004F606                 btst    #4,$93E(a2)
+0004F60C                 beq.w   loc_4F6B2
+0004F610                 movea.l $96E(a2),a0
+0004F614                 move.l  #$1000,d1
+0004F61A                 sub.l   a0,d1
+0004F61C                 move.l  #$1000,d0
+0004F622                 sub.l   $976(a2),d0
+0004F626                 cmp.l   d0,d1
+0004F628                 bge.s   loc_4F62C
+0004F62A                 move.l  d1,d0
+0004F62C
+0004F62C loc_4F62C:                              ; CODE XREF: ROM:0004F628j
+0004F62C                 move.l  d2,d5
+0004F62E                 cmp.l   d5,d0
+0004F630                 bge.s   loc_4F634
+0004F632                 move.l  d0,d5
+0004F634
+0004F634 loc_4F634:                              ; CODE XREF: ROM:0004F630j
+0004F634                 move.l  d5,-(sp)
+0004F636                 pea     (a0,a1.l)
+0004F63A                 move.l  d4,-(sp)
+0004F63C                 lea     (sub_58C62).l,a3
+0004F642                 jsr     (a3)
+0004F644                 addq.w  #8,sp
+0004F646                 addq.w  #4,sp
+0004F648                 move.l  $96E(a2),d0
+0004F64C                 add.l   d5,d0
+0004F64E                 andi.l  #$FFF,d0
+0004F654                 move.l  d0,$96E(a2)
+0004F658                 move.l  $976(a2),d0
+0004F65C                 add.l   d5,d0
+0004F65E                 move.l  d0,$976(a2)
+0004F662                 add.l   d5,d4
+0004F664                 sub.l   d5,d2
+0004F666                 move.l  $96E(a2),d3
+0004F66A                 move.l  #$1000,d1
+0004F670                 sub.l   d3,d1
+0004F672                 move.l  #$1000,d7
+0004F678                 sub.l   d0,d7
+0004F67A                 move.l  d7,d0
+0004F67C                 cmp.l   d0,d1
+0004F67E                 bge.s   loc_4F682
+0004F680                 move.l  d1,d0
+0004F682
+0004F682 loc_4F682:                              ; CODE XREF: ROM:0004F67Ej
+0004F682                 move.l  d2,d5
+0004F684                 cmp.l   d5,d0
+0004F686                 bge.s   loc_4F68A
+0004F688                 move.l  d0,d5
+0004F68A
+0004F68A loc_4F68A:                              ; CODE XREF: ROM:0004F686j
+0004F68A                 move.l  d5,-(sp)
+0004F68C                 add.l   $96A(a2),d3
+0004F690                 move.l  d3,-(sp)
+0004F692                 move.l  d4,-(sp)
+0004F694                 jsr     (a3)
+0004F696                 addq.w  #8,sp
+0004F698                 addq.w  #4,sp
+0004F69A                 move.l  $96E(a2),d0
+0004F69E                 add.l   d5,d0
+0004F6A0                 andi.l  #$FFF,d0
+0004F6A6                 move.l  d0,$96E(a2)
+0004F6AA                 add.l   d5,$976(a2)
+0004F6AE                 bra.w   loc_4FE30
+0004F6B2 ; ---------------------------------------------------------------------------
+0004F6B2
+0004F6B2 loc_4F6B2:                              ; CODE XREF: ROM:0004F60Cj
+0004F6B2                 move.l  d2,d5
+0004F6B4                 movea.l d4,a4
+0004F6B6                 movea.l $10(a6),a3
+0004F6BA                 beq.w   loc_4FE22
+0004F6BE                 clr.l   d6
+0004F6C0
+0004F6C0 loc_4F6C0:                              ; CODE XREF: ROM:0004FE1Ej
+0004F6C0                 tst.l   a3
+0004F6C2                 beq.s   loc_4F6C8
+0004F6C4                 move.b  (a3)+,-$41(a6)
+0004F6C8
+0004F6C8 loc_4F6C8:                              ; CODE XREF: ROM:0004F6C2j
+0004F6C8                 move.b  -$41(a6),d0
+0004F6CC                 extb.l  d0
+0004F6CE                 moveq   #4,d7
+0004F6D0                 cmp.l   d0,d7
+0004F6D2                 bcs.w   loc_4FE00
+0004F6D6                 move.w  word_4F6DE(pc,d0.l*2),d0
+0004F6DA                 jmp     word_4F6DE(pc,d0.w)
+0004F6DA ; ---------------------------------------------------------------------------
+0004F6DE word_4F6DE:     dc.w $A
+0004F6E0                 dc.w $52C
+0004F6E2                 dc.w $5FA
+0004F6E4                 dc.w $5FA
+0004F6E6                 dc.w $6DA
+0004F6E8 ; ---------------------------------------------------------------------------
+0004F6E8                 move.b  (a4),d4
+0004F6EA                 btst    #5,$93E(a2)
+0004F6F0                 bne.w   loc_4FBDA
+0004F6F4                 tst.b   $FC(a2)
+0004F6F8                 bge.s   loc_4F710
+0004F6FA                 movea.l $DA(a2),a0
+0004F6FE                 move.l  (a0),d0
+0004F700                 andi.l  #$C00,d0
+0004F706                 cmpi.l  #$C00,d0
+0004F70C                 beq.w   loc_4F82E
+0004F710
+0004F710 loc_4F710:                              ; CODE XREF: ROM:0004F6F8j
+0004F710                 movea.l $DA(a2),a0
+0004F714                 move.l  (a0),d0
+0004F716                 btst    #5,d0
+0004F71A                 beq.s   loc_4F720
+0004F71C                 andi.b  #$7F,d4 ; ''
+0004F720
+0004F720 loc_4F720:                              ; CODE XREF: ROM:0004F71Aj
+0004F720                 btst    #9,d0
+0004F724                 beq.s   loc_4F74A
+0004F726                 tst.w   $E(a0)
+0004F72A                 bge.s   loc_4F74A
+0004F72C                 move.b  d4,(byte_11CE18).l
+0004F732                 move.b  d4,d0
+0004F734                 extb.l  d0
+0004F736                 lea     (unk_1069F9).l,a0
+0004F73C                 btst    #0,(a0,d0.l)
+0004F742                 beq.s   loc_4F74A
+0004F744                 move.b  d0,d4
+0004F746                 addi.b  #$20,d4 ; ' '
+0004F74A
+0004F74A loc_4F74A:                              ; CODE XREF: ROM:0004F724j
+0004F74A                                         ; ROM:0004F72Aj ...
+0004F74A                 move.b  $93E(a2),d3
+0004F74E                 btst    #2,d3
+0004F752                 beq.s   loc_4F776
+0004F754                 movea.l $DA(a2),a0
+0004F758                 btst    #2,2(a0)
+0004F75E                 beq.w   loc_4FE1A
+0004F762                 cmp.b   $19(a0),d4
+0004F766                 beq.w   loc_4F82E
+0004F76A                 cmp.b   $1A(a0),d4
+0004F76E                 bne.w   loc_4FE1A
+0004F772                 bra.w   loc_4F842
+0004F776 ; ---------------------------------------------------------------------------
+0004F776
+0004F776 loc_4F776:                              ; CODE XREF: ROM:0004F752j
+0004F776                 move.b  d4,d6
+0004F778                 lea     $94A(a2),a0
+0004F77C                 move.l  d6,d2
+0004F77E                 asr.l   #5,d2
+0004F780                 moveq   #$1F,d1
+0004F782                 and.l   d6,d1
+0004F784                 moveq   #1,d0
+0004F786                 asl.l   d1,d0
+0004F788                 and.l   (a0,d2.l*4),d0
+0004F78C                 beq.s   loc_4F792
+0004F78E                 tst.b   d3
+0004F790                 bge.s   loc_4F7E8
+0004F792
+0004F792 loc_4F792:                              ; CODE XREF: ROM:0004F78Cj
+0004F792                 btst    #6,d3
+0004F796                 beq.s   loc_4F7B0
+0004F798                 pea     ($2F).w
+0004F79C                 move.l  a2,-(sp)
+0004F79E                 movea.l $62(a2),a0
+0004F7A2                 jsr     (a0)
+0004F7A4                 addq.w  #8,sp
+0004F7A6                 addq.l  #2,$93A(a2)
+0004F7AA                 andi.b  #$BF,$93E(a2)
+0004F7B0
+0004F7B0 loc_4F7B0:                              ; CODE XREF: ROM:0004F796j
+0004F7B0                 andi.b  #$7F,$93E(a2) ; ''
+0004F7B6                 movea.l $DA(a2),a0
+0004F7BA                 btst    #3,$F(a0)
+0004F7C0                 beq.w   loc_4FB9C
+0004F7C4                 cmpi.l  #$FFE,$976(a2)
+0004F7CC                 bgt.w   loc_4FB5A
+0004F7D0                 movea.l $B7E(a2),a5
+0004F7D4                 cmpa.l  $96E(a2),a5
+0004F7D8                 bne.s   loc_4F7E0
+0004F7DA                 move.l  $93A(a2),$B82(a2)
+0004F7E0
+0004F7E0 loc_4F7E0:                              ; CODE XREF: ROM:0004F7D8j
+0004F7E0                 move.l  a2,-(sp)
+0004F7E2                 move.l  d6,-(sp)
+0004F7E4                 bra.w   loc_4FB96
+0004F7E8 ; ---------------------------------------------------------------------------
+0004F7E8
+0004F7E8 loc_4F7E8:                              ; CODE XREF: ROM:0004F790j
+0004F7E8                 cmpi.b  #$D,d4
+0004F7EC                 bne.s   loc_4F806
+0004F7EE                 movea.l $DA(a2),a0
+0004F7F2                 move.l  (a0),d0
+0004F7F4                 tst.b   d0
+0004F7F6                 blt.w   loc_4FE1A
+0004F7FA                 btst    #8,d0
+0004F7FE                 beq.s   loc_4F81C
+0004F800                 move.b  #$A,d4
+0004F804                 bra.s   loc_4F81C
+0004F806 ; ---------------------------------------------------------------------------
+0004F806
+0004F806 loc_4F806:                              ; CODE XREF: ROM:0004F7ECj
+0004F806                 cmpi.b  #$A,d4
+0004F80A                 bne.s   loc_4F81C
+0004F80C                 movea.l $DA(a2),a0
+0004F810                 btst    #6,3(a0)
+0004F816                 beq.s   loc_4F81C
+0004F818                 move.b  #$D,d4
+0004F81C
+0004F81C loc_4F81C:                              ; CODE XREF: ROM:0004F7FEj
+0004F81C                                         ; ROM:0004F804j ...
+0004F81C                 movea.l $DA(a2),a0
+0004F820                 btst    #2,2(a0)
+0004F826                 beq.s   loc_4F850
+0004F828                 cmp.b   $19(a0),d4
+0004F82C                 bne.s   loc_4F83C
+0004F82E
+0004F82E loc_4F82E:                              ; CODE XREF: ROM:0004F70Cj
+0004F82E                                         ; ROM:0004F766j
+0004F82E                 move.l  a2,-(sp)
+0004F830                 bsr.l   sub_4A528
+0004F836                 addq.w  #4,sp
+0004F838                 bra.w   loc_4FE1A
+0004F83C ; ---------------------------------------------------------------------------
+0004F83C
+0004F83C loc_4F83C:                              ; CODE XREF: ROM:0004F82Cj
+0004F83C                 cmp.b   $1A(a0),d4
+0004F840                 bne.s   loc_4F850
+0004F842
+0004F842 loc_4F842:                              ; CODE XREF: ROM:0004F772j
+0004F842                 move.l  a2,-(sp)
+0004F844                 bsr.l   sub_4A4CE
+0004F84A                 addq.w  #4,sp
+0004F84C                 bra.w   loc_4FE1A
+0004F850 ; ---------------------------------------------------------------------------
+0004F850
+0004F850 loc_4F850:                              ; CODE XREF: ROM:0004F826j
+0004F850                                         ; ROM:0004F840j
+0004F850                 movea.l $DA(a2),a0
+0004F854                 btst    #0,$F(a0)
+0004F85A                 beq.s   loc_4F89C
+0004F85C                 moveq   #2,d1
+0004F85E                 cmp.b   $11(a0),d4
+0004F862                 beq.s   loc_4F874
+0004F864                 moveq   #3,d1
+0004F866                 cmp.b   $12(a0),d4
+0004F86A                 beq.s   loc_4F874
+0004F86C                 moveq   #$14,d1
+0004F86E                 cmp.b   $1B(a0),d4
+0004F872                 bne.s   loc_4F89C
+0004F874
+0004F874 loc_4F874:                              ; CODE XREF: ROM:0004F862j
+0004F874                                         ; ROM:0004F86Aj
+0004F874                 move.l  $E2(a2),d0
+0004F878                 ble.s   loc_4F88C
+0004F87A                 pea     (1).w
+0004F87E                 move.l  d1,-(sp)
+0004F880                 move.l  d0,-(sp)
+0004F882                 bsr.l   sub_86C4
+0004F888                 addq.w  #8,sp
+0004F88A                 addq.w  #4,sp
+0004F88C
+0004F88C loc_4F88C:                              ; CODE XREF: ROM:0004F878j
+0004F88C                 movea.l $DA(a2),a0
+0004F890                 tst.b   $F(a0)
+0004F894                 blt.w   loc_4FE1A
+0004F898                 bra.w   loc_4FC38
+0004F89C ; ---------------------------------------------------------------------------
+0004F89C
+0004F89C loc_4F89C:                              ; CODE XREF: ROM:0004F85Aj
+0004F89C                                         ; ROM:0004F872j
+0004F89C                 movea.l $DA(a2),a0
+0004F8A0                 move.l  $C(a0),d0
+0004F8A4                 btst    #1,d0
+0004F8A8                 beq.w   loc_4FB24
+0004F8AC                 cmp.b   $13(a0),d4
+0004F8B0                 beq.s   loc_4F8C2
+0004F8B2                 cmp.b   $14(a0),d4
+0004F8B6                 beq.s   loc_4F8C2
+0004F8B8                 cmp.b   $1F(a0),d4
+0004F8BC                 bne.s   loc_4F8D4
+0004F8BE                 tst.w   d0
+0004F8C0                 bge.s   loc_4F8D4
+0004F8C2
+0004F8C2 loc_4F8C2:                              ; CODE XREF: ROM:0004F8B0j
+0004F8C2                                         ; ROM:0004F8B6j
+0004F8C2                 move.l  a2,-(sp)
+0004F8C4                 clr.l   -(sp)
+0004F8C6                 move.b  d4,3(sp)
+0004F8CA                 bsr.w   sub_4F2B4
+0004F8CE                 addq.w  #8,sp
+0004F8D0                 bra.w   loc_4FE1A
+0004F8D4 ; ---------------------------------------------------------------------------
+0004F8D4
+0004F8D4 loc_4F8D4:                              ; CODE XREF: ROM:0004F8BCj
+0004F8D4                                         ; ROM:0004F8C0j
+0004F8D4                 movea.l $DA(a2),a0
+0004F8D8                 cmp.b   $20(a0),d4
+0004F8DC                 bne.s   loc_4F942
+0004F8DE                 tst.w   $E(a0)
+0004F8E2                 bge.s   loc_4F942
+0004F8E4                 move.b  $93E(a2),d0
+0004F8E8                 ori.b   #$80,d0
+0004F8EC                 move.b  d0,$93E(a2)
+0004F8F0                 movea.l $DA(a2),a0
+0004F8F4                 btst    #3,$F(a0)
+0004F8FA                 beq.w   loc_4FE1A
+0004F8FE                 btst    #6,d0
+0004F902                 beq.s   loc_4F91C
+0004F904                 pea     ($2F).w
+0004F908                 move.l  a2,-(sp)
+0004F90A                 movea.l $62(a2),a0
+0004F90E                 jsr     (a0)
+0004F910                 addq.w  #8,sp
+0004F912                 addq.l  #2,$93A(a2)
+0004F916                 andi.b  #$BF,$93E(a2)
+0004F91C
+0004F91C loc_4F91C:                              ; CODE XREF: ROM:0004F902j
+0004F91C                 movea.l $DA(a2),a0
+0004F920                 btst    #1,$E(a0)
+0004F926                 beq.w   loc_4FE1A
+0004F92A                 pea     ($5E).w
+0004F92E                 move.l  a2,-(sp)
+0004F930                 movea.l $62(a2),a0
+0004F934                 jsr     (a0)
+0004F936                 addq.w  #4,sp
+0004F938                 move.l  #8,(sp)
+0004F93E                 bra.w   loc_4FB5E
+0004F942 ; ---------------------------------------------------------------------------
+0004F942
+0004F942 loc_4F942:                              ; CODE XREF: ROM:0004F8DCj
+0004F942                                         ; ROM:0004F8E2j
+0004F942                 movea.l $DA(a2),a0
+0004F946                 cmp.b   $1D(a0),d4
+0004F94A                 bne.w   loc_4F9D0
+0004F94E                 move.l  $C(a0),d0
+0004F952                 andi.l  #$8008,d0
+0004F958                 cmpi.l  #$8008,d0
+0004F95E                 bne.s   loc_4F9D0
+0004F960                 move.l  $B7E(a2),d3
+0004F964                 btst    #6,$93E(a2)
+0004F96A                 beq.s   loc_4F984
+0004F96C                 pea     ($2F).w
+0004F970                 move.l  a2,-(sp)
+0004F972                 movea.l $62(a2),a0
+0004F976                 jsr     (a0)
+0004F978                 addq.w  #8,sp
+0004F97A                 addq.l  #2,$93A(a2)
+0004F97E                 andi.b  #$BF,$93E(a2)
+0004F984
+0004F984 loc_4F984:                              ; CODE XREF: ROM:0004F96Aj
+0004F984                 move.l  a2,-(sp)
+0004F986                 clr.l   -(sp)
+0004F988                 move.b  d4,3(sp)
+0004F98C                 bsr.w   sub_4F246
+0004F990                 move.l  a2,-(sp)
+0004F992                 pea     ($A).w
+0004F996                 bsr.w   sub_4F0CA
+0004F99A                 addq.w  #8,sp
+0004F99C                 addq.w  #8,sp
+0004F99E                 cmp.l   $96E(a2),d3
+0004F9A2                 beq.w   loc_4FE1A
+0004F9A6                 clr.l   d2
+0004F9A8
+0004F9A8 loc_4F9A8:                              ; CODE XREF: ROM:0004F9CAj
+0004F9A8                 move.l  a2,-(sp)
+0004F9AA                 movea.l $96A(a2),a0
+0004F9AE                 move.b  (a0,d3.l),d2
+0004F9B2                 move.l  d2,-(sp)
+0004F9B4                 bsr.w   sub_4F246
+0004F9B8                 move.l  d3,d0
+0004F9BA                 addq.l  #1,d0
+0004F9BC                 move.l  d0,d3
+0004F9BE                 andi.l  #$FFF,d3
+0004F9C4                 addq.w  #8,sp
+0004F9C6                 cmp.l   $96E(a2),d3
+0004F9CA                 bne.s   loc_4F9A8
+0004F9CC                 bra.w   loc_4FE1A
+0004F9D0 ; ---------------------------------------------------------------------------
+0004F9D0
+0004F9D0 loc_4F9D0:                              ; CODE XREF: ROM:0004F94Aj
+0004F9D0                                         ; ROM:0004F95Ej
+0004F9D0                 cmpi.b  #$A,d4
+0004F9D4                 bne.s   loc_4FA00
+0004F9D6                 movea.l $DA(a2),a0
+0004F9DA                 moveq   #$48,d0 ; 'H'
+0004F9DC                 and.l   $C(a0),d0
+0004F9E0                 beq.w   loc_4FAAE
+0004F9E4                 cmpi.l  #$FFE,$976(a2)
+0004F9EC                 bgt.w   loc_4FB5A
+0004F9F0                 move.l  a2,-(sp)
+0004F9F2                 pea     ($A).w
+0004F9F6                 bsr.w   sub_4F0CA
+0004F9FA                 addq.w  #8,sp
+0004F9FC                 bra.w   loc_4FAAE
+0004FA00 ; ---------------------------------------------------------------------------
+0004FA00
+0004FA00 loc_4FA00:                              ; CODE XREF: ROM:0004F9D4j
+0004FA00                 movea.l $DA(a2),a0
+0004FA04                 cmp.b   $15(a0),d4
+0004FA08                 bne.s   loc_4FA2A
+0004FA0A                 move.l  $B7E(a2),d7
+0004FA0E                 cmp.l   $96E(a2),d7
+0004FA12                 beq.s   loc_4FA24
+0004FA14                 lea     $EC(a2),a0
+0004FA18                 move    sr,d0
+0004FA1A                 ori     #$700,sr
+0004FA1E                 moveq   #$40,d7 ; '@'
+0004FA20                 or.l    d7,(a0)
+0004FA22                 move    d0,sr
+0004FA24
+0004FA24 loc_4FA24:                              ; CODE XREF: ROM:0004FA12j
+0004FA24                 clr.b   d4
+0004FA26                 bra.w   loc_4FAAE
+0004FA2A ; ---------------------------------------------------------------------------
+0004FA2A
+0004FA2A loc_4FA2A:                              ; CODE XREF: ROM:0004FA08j
+0004FA2A                 cmp.b   $1C(a0),d4
+0004FA2E                 beq.s   loc_4FA40
+0004FA30                 cmp.b   $21(a0),d4
+0004FA34                 bne.w   loc_4FB24
+0004FA38                 tst.w   $E(a0)
+0004FA3C                 bge.w   loc_4FB24
+0004FA40
+0004FA40 loc_4FA40:                              ; CODE XREF: ROM:0004FA2Ej
+0004FA40                 btst    #3,$F(a0)
+0004FA46                 beq.s   loc_4FA72
+0004FA48                 cmpi.l  #$FFE,$976(a2)
+0004FA50                 bgt.w   loc_4FB5A
+0004FA54                 movea.l $B7E(a2),a5
+0004FA58                 cmpa.l  $96E(a2),a5
+0004FA5C                 bne.s   loc_4FA64
+0004FA5E                 move.l  $93A(a2),$B82(a2)
+0004FA64
+0004FA64 loc_4FA64:                              ; CODE XREF: ROM:0004FA5Cj
+0004FA64                 move.l  a2,-(sp)
+0004FA66                 clr.l   -(sp)
+0004FA68                 move.b  d4,3(sp)
+0004FA6C                 bsr.w   sub_4F246
+0004FA70                 addq.w  #8,sp
+0004FA72
+0004FA72 loc_4FA72:                              ; CODE XREF: ROM:0004FA46j
+0004FA72                 movea.l $DA(a2),a0
+0004FA76                 btst    #3,3(a0)
+0004FA7C                 beq.s   loc_4FAAE
+0004FA7E                 cmpi.b  #$FF,d4
+0004FA82                 bne.s   loc_4FAAE
+0004FA84                 cmpi.l  #$FFF,$976(a2)
+0004FA8C                 bgt.s   loc_4FAAE
+0004FA8E                 movea.l $96A(a2),a0
+0004FA92                 movea.l $96E(a2),a1
+0004FA96                 move.b  d4,(a1,a0.l)
+0004FA9A                 move.l  $96E(a2),d0
+0004FA9E                 addq.l  #1,d0
+0004FAA0                 andi.l  #$FFF,d0
+0004FAA6                 move.l  d0,$96E(a2)
+0004FAAA                 addq.l  #1,$976(a2)
+0004FAAE
+0004FAAE loc_4FAAE:                              ; CODE XREF: ROM:0004F9E0j
+0004FAAE                                         ; ROM:0004F9FCj ...
+0004FAAE                 move.l  $96E(a2),d1
+0004FAB2                 lea     $97A(a2),a0
+0004FAB6                 move.l  d1,d0
+0004FAB8                 asr.l   #5,d0
+0004FABA                 lea     (a0,d0.l*4),a0
+0004FABE                 moveq   #$1F,d7
+0004FAC0                 and.l   d7,d1
+0004FAC2                 moveq   #1,d0
+0004FAC4                 asl.l   d1,d0
+0004FAC6                 move    sr,d1
+0004FAC8                 ori     #$700,sr
+0004FACC                 or.l    d0,(a0)
+0004FACE                 move    d1,sr
+0004FAD0                 cmpi.l  #$FFF,$976(a2)
+0004FAD8                 bgt.s   loc_4FAFA
+0004FADA                 movea.l $96A(a2),a0
+0004FADE                 movea.l $96E(a2),a1
+0004FAE2                 move.b  d4,(a1,a0.l)
+0004FAE6                 move.l  $96E(a2),d0
+0004FAEA                 addq.l  #1,d0
+0004FAEC                 andi.l  #$FFF,d0
+0004FAF2                 move.l  d0,$96E(a2)
+0004FAF6                 addq.l  #1,$976(a2)
+0004FAFA
+0004FAFA loc_4FAFA:                              ; CODE XREF: ROM:0004FAD8j
+0004FAFA                 move.l  $96E(a2),$B7E(a2)
+0004FB00                 addq.l  #1,$B7A(a2)
+0004FB04                 move.l  $102(a2),d0
+0004FB08                 beq.s   loc_4FB18
+0004FB0A                 pea     ($1D).w
+0004FB0E                 move.l  d0,-(sp)
+0004FB10                 bsr.l   sub_14F10
+0004FB16                 addq.w  #8,sp
+0004FB18
+0004FB18 loc_4FB18:                              ; CODE XREF: ROM:0004FB08j
+0004FB18                 tst.l   $92E(a2)
+0004FB1C                 beq.w   loc_4FE1A
+0004FB20                 bra.w   loc_4FDAA
+0004FB24 ; ---------------------------------------------------------------------------
+0004FB24
+0004FB24 loc_4FB24:                              ; CODE XREF: ROM:0004F8A8j
+0004FB24                                         ; ROM:0004FA34j ...
+0004FB24                 btst    #6,$93E(a2)
+0004FB2A                 beq.s   loc_4FB44
+0004FB2C                 pea     ($2F).w
+0004FB30                 move.l  a2,-(sp)
+0004FB32                 movea.l $62(a2),a0
+0004FB36                 jsr     (a0)
+0004FB38                 addq.w  #8,sp
+0004FB3A                 addq.l  #2,$93A(a2)
+0004FB3E                 andi.b  #$BF,$93E(a2)
+0004FB44
+0004FB44 loc_4FB44:                              ; CODE XREF: ROM:0004FB2Aj
+0004FB44                 movea.l $DA(a2),a0
+0004FB48                 btst    #3,$F(a0)
+0004FB4E                 beq.s   loc_4FB9C
+0004FB50                 cmpi.l  #$FFE,$976(a2)
+0004FB58                 ble.s   loc_4FB6C
+0004FB5A
+0004FB5A loc_4FB5A:                              ; CODE XREF: ROM:0004F7CCj
+0004FB5A                                         ; ROM:0004F9ECj ...
+0004FB5A                 pea     (7).w
+0004FB5E
+0004FB5E loc_4FB5E:                              ; CODE XREF: ROM:0004F93Ej
+0004FB5E                 move.l  a2,-(sp)
+0004FB60                 movea.l $62(a2),a0
+0004FB64                 jsr     (a0)
+0004FB66                 addq.w  #8,sp
+0004FB68                 bra.w   loc_4FE1A
+0004FB6C ; ---------------------------------------------------------------------------
+0004FB6C
+0004FB6C loc_4FB6C:                              ; CODE XREF: ROM:0004FB58j
+0004FB6C                 cmpi.b  #$A,d4
+0004FB70                 bne.s   loc_4FB7E
+0004FB72                 move.l  a2,-(sp)
+0004FB74                 pea     ($A).w
+0004FB78                 bsr.w   sub_4F0CA
+0004FB7C                 bra.s   loc_4FB9A
+0004FB7E ; ---------------------------------------------------------------------------
+0004FB7E
+0004FB7E loc_4FB7E:                              ; CODE XREF: ROM:0004FB70j
+0004FB7E                 movea.l $B7E(a2),a5
+0004FB82                 cmpa.l  $96E(a2),a5
+0004FB86                 bne.s   loc_4FB8E
+0004FB88                 move.l  $93A(a2),$B82(a2)
+0004FB8E
+0004FB8E loc_4FB8E:                              ; CODE XREF: ROM:0004FB86j
+0004FB8E                 move.l  a2,-(sp)
+0004FB90                 clr.l   -(sp)
+0004FB92                 move.b  d4,3(sp)
+0004FB96
+0004FB96 loc_4FB96:                              ; CODE XREF: ROM:0004F7E4j
+0004FB96                 bsr.w   sub_4F246
+0004FB9A
+0004FB9A loc_4FB9A:                              ; CODE XREF: ROM:0004FB7Cj
+0004FB9A                 addq.w  #8,sp
+0004FB9C
+0004FB9C loc_4FB9C:                              ; CODE XREF: ROM:0004F7C0j
+0004FB9C                                         ; ROM:0004FB4Ej
+0004FB9C                 movea.l $DA(a2),a0
+0004FBA0                 btst    #3,3(a0)
+0004FBA6                 beq.s   loc_4FBDA
+0004FBA8                 cmpi.b  #$FF,d4
+0004FBAC                 bne.s   loc_4FBDA
+0004FBAE                 cmpi.l  #$FFF,$976(a2)
+0004FBB6                 bgt.w   loc_4FE1A
+0004FBBA                 movea.l $96A(a2),a0
+0004FBBE                 movea.l $96E(a2),a1
+0004FBC2                 move.b  d4,(a1,a0.l)
+0004FBC6                 move.l  $96E(a2),d0
+0004FBCA                 addq.l  #1,d0
+0004FBCC                 andi.l  #$FFF,d0
+0004FBD2                 move.l  d0,$96E(a2)
+0004FBD6                 addq.l  #1,$976(a2)
+0004FBDA
+0004FBDA loc_4FBDA:                              ; CODE XREF: ROM:0004F6F0j
+0004FBDA                                         ; ROM:0004FBA6j ...
+0004FBDA                 cmpi.l  #$FFF,$976(a2)
+0004FBE2                 bgt.w   loc_4FE1A
+0004FBE6                 movea.l $96A(a2),a0
+0004FBEA                 movea.l $96E(a2),a1
+0004FBEE                 move.b  d4,(a1,a0.l)
+0004FBF2                 move.l  $96E(a2),d0
+0004FBF6                 addq.l  #1,d0
+0004FBF8                 andi.l  #$FFF,d0
+0004FBFE                 move.l  d0,$96E(a2)
+0004FC02                 addq.l  #1,$976(a2)
+0004FC06                 bra.w   loc_4FE1A
+0004FC0A ; ---------------------------------------------------------------------------
+0004FC0A                 movea.l $DA(a2),a0
+0004FC0E                 move.l  (a0),d0
+0004FC10                 btst    #0,d0
+0004FC14                 bne.w   loc_4FE1A
+0004FC18                 btst    #1,d0
+0004FC1C                 beq.s   loc_4FC54
+0004FC1E                 move.l  $E2(a2),d0
+0004FC22                 ble.s   loc_4FC38
+0004FC24                 pea     (1).w
+0004FC28                 pea     (2).w
+0004FC2C                 move.l  d0,-(sp)
+0004FC2E                 bsr.l   sub_86C4
+0004FC34                 addq.w  #8,sp
+0004FC36                 addq.w  #4,sp
+0004FC38
+0004FC38 loc_4FC38:                              ; CODE XREF: ROM:0004F898j
+0004FC38                                         ; ROM:0004FC22j
+0004FC38                 move.l  a2,-(sp)
+0004FC3A                 bsr.w   sub_4F018
+0004FC3E                 addq.w  #4,sp
+0004FC40                 movea.l $8E(a2),a0
+0004FC44                 tst.l   a0
+0004FC46                 beq.w   loc_4FE1A
+0004FC4A                 move.l  a2,-(sp)
+0004FC4C                 jsr     (a0)
+0004FC4E                 addq.w  #4,sp
+0004FC50                 bra.w   loc_4FE1A
+0004FC54 ; ---------------------------------------------------------------------------
+0004FC54
+0004FC54 loc_4FC54:                              ; CODE XREF: ROM:0004FC1Cj
+0004FC54                 btst    #3,d0
+0004FC58                 beq.s   loc_4FCBC
+0004FC5A                 cmpi.l  #$FFF,$976(a2)
+0004FC62                 bgt.w   loc_4FDAA
+0004FC66                 movea.l $96A(a2),a1
+0004FC6A                 movea.l $96E(a2),a0
+0004FC6E                 move.b  #$FF,(a0,a1.l)
+0004FC74                 move.l  $96E(a2),d0
+0004FC78                 addq.l  #1,d0
+0004FC7A                 andi.l  #$FFF,d0
+0004FC80                 move.l  d0,$96E(a2)
+0004FC84                 movea.l $976(a2),a0
+0004FC88                 lea     1(a0),a5
+0004FC8C                 move.l  a5,$976(a2)
+0004FC90                 addq.w  #1,a0
+0004FC92                 cmpa.l  #$FFF,a0
+0004FC98                 bgt.w   loc_4FDAA
+0004FC9C                 movea.l $96A(a2),a0
+0004FCA0                 movea.l $96E(a2),a1
+0004FCA4                 clr.b   (a1,a0.l)
+0004FCA8                 move.l  $96E(a2),d0
+0004FCAC                 addq.l  #1,d0
+0004FCAE                 andi.l  #$FFF,d0
+0004FCB4                 move.l  d0,$96E(a2)
+0004FCB8                 addq.l  #1,$976(a2)
+0004FCBC
+0004FCBC loc_4FCBC:                              ; CODE XREF: ROM:0004FC58j
+0004FCBC                 cmpi.l  #$FFF,$976(a2)
+0004FCC4                 bgt.w   loc_4FDAA
+0004FCC8                 movea.l $96A(a2),a0
+0004FCCC                 movea.l $96E(a2),a1
+0004FCD0                 clr.b   (a1,a0.l)
+0004FCD4                 bra.w   loc_4FD96
+0004FCD8 ; ---------------------------------------------------------------------------
+0004FCD8                 move.b  (a4),d1
+0004FCDA                 movea.l $DA(a2),a0
+0004FCDE                 move.l  (a0),d0
+0004FCE0                 btst    #2,d0
+0004FCE4                 bne.w   loc_4FE1A
+0004FCE8                 btst    #3,d0
+0004FCEC                 beq.s   loc_4FD62
+0004FCEE                 cmpi.l  #$FFF,$976(a2)
+0004FCF6                 bgt.w   loc_4FDAA
+0004FCFA                 movea.l $96A(a2),a1
+0004FCFE                 movea.l $96E(a2),a0
+0004FD02                 move.b  #$FF,(a0,a1.l)
+0004FD08                 move.l  $96E(a2),d0
+0004FD0C                 addq.l  #1,d0
+0004FD0E                 andi.l  #$FFF,d0
+0004FD14                 move.l  d0,$96E(a2)
+0004FD18                 movea.l $976(a2),a0
+0004FD1C                 lea     1(a0),a5
+0004FD20                 move.l  a5,$976(a2)
+0004FD24                 addq.w  #1,a0
+0004FD26                 cmpa.l  #$FFF,a0
+0004FD2C                 bgt.s   loc_4FDAA
+0004FD2E                 movea.l $96A(a2),a1
+0004FD32                 movea.l $96E(a2),a0
+0004FD36                 clr.b   (a0,a1.l)
+0004FD3A                 move.l  $96E(a2),d0
+0004FD3E                 addq.l  #1,d0
+0004FD40                 andi.l  #$FFF,d0
+0004FD46                 move.l  d0,$96E(a2)
+0004FD4A                 movea.l $976(a2),a0
+0004FD4E                 lea     1(a0),a5
+0004FD52                 move.l  a5,$976(a2)
+0004FD56                 addq.w  #1,a0
+0004FD58                 cmpa.l  #$FFF,a0
+0004FD5E                 bgt.s   loc_4FDAA
+0004FD60                 bra.s   loc_4FD8A
+0004FD62 ; ---------------------------------------------------------------------------
+0004FD62
+0004FD62 loc_4FD62:                              ; CODE XREF: ROM:0004FCECj
+0004FD62                 btst    #4,d0
+0004FD66                 beq.s   loc_4FD80
+0004FD68                 cmpi.l  #$FFF,$976(a2)
+0004FD70                 bgt.s   loc_4FDAA
+0004FD72                 movea.l $96A(a2),a0
+0004FD76                 movea.l $96E(a2),a1
+0004FD7A                 clr.b   (a1,a0.l)
+0004FD7E                 bra.s   loc_4FD96
+0004FD80 ; ---------------------------------------------------------------------------
+0004FD80
+0004FD80 loc_4FD80:                              ; CODE XREF: ROM:0004FD66j
+0004FD80                 cmpi.l  #$FFF,$976(a2)
+0004FD88                 bgt.s   loc_4FDAA
+0004FD8A
+0004FD8A loc_4FD8A:                              ; CODE XREF: ROM:0004FD60j
+0004FD8A                 movea.l $96A(a2),a0
+0004FD8E                 movea.l $96E(a2),a1
+0004FD92                 move.b  d1,(a1,a0.l)
+0004FD96
+0004FD96 loc_4FD96:                              ; CODE XREF: ROM:0004FCD4j
+0004FD96                                         ; ROM:0004FD7Ej
+0004FD96                 move.l  $96E(a2),d0
+0004FD9A                 addq.l  #1,d0
+0004FD9C                 andi.l  #$FFF,d0
+0004FDA2                 move.l  d0,$96E(a2)
+0004FDA6                 addq.l  #1,$976(a2)
+0004FDAA
+0004FDAA loc_4FDAA:                              ; CODE XREF: ROM:0004FB20j
+0004FDAA                                         ; ROM:0004FC62j ...
+0004FDAA                 pea     $92E(a2)
+0004FDAE                 bsr.l   sub_4AB0
+0004FDB4                 addq.w  #4,sp
+0004FDB6                 bra.s   loc_4FE1A
+0004FDB8 ; ---------------------------------------------------------------------------
+0004FDB8                 movea.l $946(a2),a1
+0004FDBC                 lea     1(a1),a5
+0004FDC0                 move.l  a5,$946(a2)
+0004FDC4                 movea.l (off_FFA24).l,a0
+0004FDCA                 adda.w  #$FF9C,a0
+0004FDCE                 cmpa.l  $942(a2),a0
+0004FDD2                 bls.s   loc_4FE1A
+0004FDD4                 pea     1(a1)
+0004FDD8                 pea     -$40(a6)
+0004FDDC                 move.l  a2,-(sp)
+0004FDDE                 bsr.l   sub_49CE2
+0004FDE4                 addq.w  #4,sp
+0004FDE6                 move.l  d0,(sp)
+0004FDE8                 pea     $4F5B6
+0004FDEC                 bsr.l   sub_6E00
+0004FDF2                 move.l  (off_FFA24).l,$942(a2)
+0004FDFA                 clr.l   $946(a2)
+0004FDFE                 bra.s   loc_4FE16
+0004FE00 ; ---------------------------------------------------------------------------
+0004FE00
+0004FE00 loc_4FE00:                              ; CODE XREF: ROM:0004F6D2j
+0004FE00                 move.l  d0,-(sp)
+0004FE02                 move.l  a2,-(sp)
+0004FE04                 bsr.l   sub_49D46
+0004FE0A                 move.l  d0,(sp)
+0004FE0C                 pea     $4F5CF
+0004FE10                 bsr.l   sub_6E00
+0004FE16
+0004FE16 loc_4FE16:                              ; CODE XREF: ROM:0004FDFEj
+0004FE16                 addq.w  #8,sp
+0004FE18                 addq.w  #4,sp
+0004FE1A
+0004FE1A loc_4FE1A:                              ; CODE XREF: ROM:0004F75Ej
+0004FE1A                                         ; ROM:0004F76Ej ...
+0004FE1A                 subq.l  #1,d5
+0004FE1C                 addq.w  #1,a4
+0004FE1E                 bne.w   loc_4F6C0
+0004FE22
+0004FE22 loc_4FE22:                              ; CODE XREF: ROM:0004F6BAj
+0004FE22                 movea.l $66(a2),a0
+0004FE26                 tst.l   a0
+0004FE28                 beq.s   loc_4FE30
+0004FE2A                 move.l  a2,-(sp)
+0004FE2C                 jsr     (a0)
+0004FE2E                 addq.w  #4,sp
+0004FE30
+0004FE30 loc_4FE30:                              ; CODE XREF: ROM:0004F6AEj
+0004FE30                                         ; ROM:0004FE28j
+0004FE30                 btst    #3,$93E(a2)
+0004FE36                 bne.s   loc_4FE6A
+0004FE38                 clr.l   d0
+0004FE3A                 move.w  $940(a2),d0
+0004FE3E                 cmp.l   $976(a2),d0
+0004FE42                 bgt.s   loc_4FE6A
+0004FE44                 move.l  $102(a2),d0
+0004FE48                 beq.s   loc_4FE58
+0004FE4A                 pea     ($1D).w
+0004FE4E                 move.l  d0,-(sp)
+0004FE50                 bsr.l   sub_14F10
+0004FE56                 addq.w  #8,sp
+0004FE58
+0004FE58 loc_4FE58:                              ; CODE XREF: ROM:0004FE48j
+0004FE58                 tst.l   $92E(a2)
+0004FE5C                 beq.s   loc_4FE6A
+0004FE5E                 pea     $92E(a2)
+0004FE62                 bsr.l   sub_4AB0
+0004FE68                 addq.w  #4,sp
+0004FE6A
+0004FE6A loc_4FE6A:                              ; CODE XREF: ROM:0004FE36j
+0004FE6A                                         ; ROM:0004FE42j ...
+0004FE6A                 cmpi.l  #$F7F,$976(a2)
+0004FE72                 ble.s   loc_4FEA4
+0004FE74                 tst.l   $7A(a2)
+0004FE78                 beq.s   loc_4FEA4
+0004FE7A                 lea     $EC(a2),a0
+0004FE7E                 move    sr,d2
+0004FE80                 ori     #$700,sr
+0004FE84                 move.l  (a0),d1
+0004FE86                 moveq   #1,d0
+0004FE88                 and.l   d1,d0
+0004FE8A                 neg.l   d0
+0004FE8C                 neg.l   d0
+0004FE8E                 moveq   #1,d7
+0004FE90                 or.l    d1,d7
+0004FE92                 move.l  d7,(a0)
+0004FE94                 move    d2,sr
+0004FE96                 tst.l   d0
+0004FE98                 bne.s   loc_4FEA4
+0004FE9A                 move.l  a2,-(sp)
+0004FE9C                 movea.l $7A(a2),a0
+0004FEA0                 jsr     (a0)
+0004FEA2                 addq.w  #4,sp
+0004FEA4
+0004FEA4 loc_4FEA4:                              ; CODE XREF: ROM:0004F602j
+0004FEA4                                         ; ROM:0004FE72j ...
+0004FEA4                 movem.l -$6C(a6),d2-d7/a2-a5
+0004FEAA                 unlk    a6
+0004FEAC                 rts
+0004F246 sub_4F246:                              ; CODE XREF: sub_4F2B4+A8p
+0004F246                                         ; sub_4F2B4:loc_4F42Cp ...
+0004F246
+0004F246 var_E           = -$E
+0004F246 var_A           = -$A
+0004F246 arg_3           =  7
+0004F246 arg_4           =  8
+0004F246
+0004F246                 move.l  a2,-(sp)
+0004F248                 move.l  d2,-(sp)
+0004F24A                 movea.l 8+arg_4(sp),a2
+0004F24E                 move.b  8+arg_3(sp),d2
+0004F252                 movea.l $DA(a2),a0
+0004F256                 btst    #1,$E(a0)
+0004F25C                 beq.s   loc_4F2A0
+0004F25E                 clr.l   d0
+0004F260                 move.b  d2,d0
+0004F262                 lea     (unk_1069F9).l,a0
+0004F268                 btst    #3,(a0,d0.l)
+0004F26E                 beq.s   loc_4F2A0
+0004F270                 cmpi.b  #9,d2
+0004F274                 beq.s   loc_4F2A0
+0004F276                 pea     (unk_5E).w
+0004F27A                 move.l  a2,-(sp)
+0004F27C                 movea.l $62(a2),a0
+0004F280                 jsr     (a0)
+0004F282                 addq.w  #8,sp
+0004F284                 move.b  d2,d0
+0004F286                 eori.b  #$40,d0 ; '@'
+0004F28A                 clr.l   -(sp)
+0004F28C                 move.b  d0,3(sp)
+0004F290                 move.l  a2,-(sp)
+0004F292                 movea.l $62(a2),a0
+0004F296                 jsr     (a0)
+0004F298                 addq.w  #8,sp
+0004F29A                 addq.l  #2,$93A(a2)
+0004F29E                 bra.s   loc_4F2AE
+0004F2A0 ; ---------------------------------------------------------------------------
+0004F2A0
+0004F2A0 loc_4F2A0:                              ; CODE XREF: sub_4F246+16j
+0004F2A0                                         ; sub_4F246+28j ...
+0004F2A0                 move.l  a2,-(sp)
+0004F2A2                 clr.l   -(sp)
+0004F2A4                 move.b  d2,3(sp)
+0004F2A8                 bsr.w   sub_4F0CA
+0004F2AC                 addq.w  #8,sp
+0004F2AE
+0004F2AE loc_4F2AE:                              ; CODE XREF: sub_4F246+58j
+0004F2AE                 move.l  (sp)+,d2
+0004F2B0                 movea.l (sp)+,a2
+0004F2B2                 rts
+0004F2B2 ; End of function sub_4F246
+0004F2B2
+0004F2B4
+0004F0CA
+0004F0CA ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+0004F0CA
+0004F0CA
+0004F0CA sub_4F0CA:                              ; CODE XREF: sub_4F246+62p
+0004F0CA                                         ; sub_4F2B4+C2p ...
+0004F0CA
+0004F0CA var_16          = -$16
+0004F0CA arg_3           =  7
+0004F0CA arg_4           =  8
+0004F0CA
+0004F0CA                 movem.l d2-d5/a2,-(sp)
+0004F0CE                 movea.l $14+arg_4(sp),a2
+0004F0D2                 move.b  $14+arg_3(sp),d4
+0004F0D6                 move.l  a2,-(sp)
+0004F0D8                 movea.l $6A(a2),a0
+0004F0DC                 jsr     (a0)
+0004F0DE                 movea.l d0,a1
+0004F0E0                 addq.w  #4,sp
+0004F0E2                 tst.l   a1
+0004F0E4                 beq.w   loc_4F1B2
+0004F0E8                 movea.l $DA(a2),a0
+0004F0EC                 move.l  4(a0),d3
+0004F0F0                 btst    #0,d3
+0004F0F4                 beq.w   loc_4F22E
+0004F0F8                 clr.l   d0
+0004F0FA                 move.b  d4,d0
+0004F0FC                 moveq   #9,d5
+0004F0FE                 cmp.l   d0,d5
+0004F100                 beq.w   loc_4F192
+0004F104                 blt.s   loc_4F112
+0004F106                 moveq   #8,d5
+0004F108                 cmp.l   d0,d5
+0004F10A                 beq.w   loc_4F1DE
+0004F10E                 bra.w   loc_4F1EE
+0004F112 ; ---------------------------------------------------------------------------
+0004F112
+0004F112 loc_4F112:                              ; CODE XREF: sub_4F0CA+3Aj
+0004F112                 moveq   #$A,d5
+0004F114                 cmp.l   d0,d5
+0004F116                 beq.s   loc_4F122
+0004F118                 moveq   #$D,d5
+0004F11A                 cmp.l   d0,d5
+0004F11C                 beq.s   loc_4F15A
+0004F11E                 bra.w   loc_4F1EE
+0004F122 ; ---------------------------------------------------------------------------
+0004F122
+0004F122 loc_4F122:                              ; CODE XREF: sub_4F0CA+4Cj
+0004F122                 btst    #5,d3
+0004F126                 beq.s   loc_4F12C
+0004F128                 clr.l   $93A(a2)
+0004F12C
+0004F12C loc_4F12C:                              ; CODE XREF: sub_4F0CA+5Cj
+0004F12C                 movea.l $DA(a2),a0
+0004F130                 btst    #2,7(a0)
+0004F136                 beq.s   loc_4F150
+0004F138                 moveq   #1,d5
+0004F13A                 cmp.l   a1,d5
+0004F13C                 bge.s   loc_4F1B2
+0004F13E                 pea     (unk_D).w
+0004F142                 move.l  a2,-(sp)
+0004F144                 movea.l $62(a2),a0
+0004F148                 jsr     (a0)
+0004F14A                 clr.l   $93A(a2)
+0004F14E                 addq.w  #8,sp
+0004F150
+0004F150 loc_4F150:                              ; CODE XREF: sub_4F0CA+6Cj
+0004F150                 move.l  $93A(a2),$B82(a2)
+0004F156                 bra.w   loc_4F22E
+0004F15A ; ---------------------------------------------------------------------------
+0004F15A
+0004F15A loc_4F15A:                              ; CODE XREF: sub_4F0CA+52j
+0004F15A                 btst    #4,d3
+0004F15E                 beq.s   loc_4F16C
+0004F160                 tst.l   $93A(a2)
+0004F164                 bne.s   loc_4F16C
+0004F166                 clr.l   d0
+0004F168                 bra.w   loc_4F240
+0004F16C ; ---------------------------------------------------------------------------
+0004F16C
+0004F16C loc_4F16C:                              ; CODE XREF: sub_4F0CA+94j
+0004F16C                                         ; sub_4F0CA+9Aj
+0004F16C                 movea.l $DA(a2),a0
+0004F170                 move.l  4(a0),d0
+0004F174                 btst    #3,d0
+0004F178                 beq.s   loc_4F186
+0004F17A                 move.b  #$A,d4
+0004F17E                 btst    #5,d0
+0004F182                 beq.w   loc_4F22E
+0004F186
+0004F186 loc_4F186:                              ; CODE XREF: sub_4F0CA+AEj
+0004F186                 clr.l   $93A(a2)
+0004F18A                 clr.l   $B82(a2)
+0004F18E                 bra.w   loc_4F22E
+0004F192 ; ---------------------------------------------------------------------------
+0004F192
+0004F192 loc_4F192:                              ; CODE XREF: sub_4F0CA+36j
+0004F192                 move.l  $93A(a2),d2
+0004F196                 moveq   #7,d0
+0004F198                 and.l   d2,d0
+0004F19A                 moveq   #8,d1
+0004F19C                 sub.l   d0,d1
+0004F19E                 move.l  d3,d0
+0004F1A0                 andi.l  #$1800,d0
+0004F1A6                 cmpi.l  #$1800,d0
+0004F1AC                 bne.s   loc_4F1D6
+0004F1AE                 cmp.l   a1,d1
+0004F1B0                 ble.s   loc_4F1B8
+0004F1B2
+0004F1B2 loc_4F1B2:                              ; CODE XREF: sub_4F0CA+1Aj
+0004F1B2                                         ; sub_4F0CA+72j
+0004F1B2                 moveq   #$FFFFFFFF,d0
+0004F1B4                 bra.w   loc_4F240
+0004F1B8 ; ---------------------------------------------------------------------------
+0004F1B8
+0004F1B8 loc_4F1B8:                              ; CODE XREF: sub_4F0CA+E6j
+0004F1B8                 add.l   d1,d2
+0004F1BA                 move.l  d2,$93A(a2)
+0004F1BE                 move.l  d1,-(sp)
+0004F1C0                 pea     unk_4F0C0
+0004F1C4                 clr.l   -(sp)
+0004F1C6                 move.l  a2,-(sp)
+0004F1C8                 movea.l $5E(a2),a0
+0004F1CC                 jsr     (a0)
+0004F1CE                 clr.l   d0
+0004F1D0                 addq.w  #8,sp
+0004F1D2                 addq.w  #8,sp
+0004F1D4                 bra.s   loc_4F240
+0004F1D6 ; ---------------------------------------------------------------------------
+0004F1D6
+0004F1D6 loc_4F1D6:                              ; CODE XREF: sub_4F0CA+E2j
+0004F1D6                 add.l   d1,d2
+0004F1D8                 move.l  d2,$93A(a2)
+0004F1DC                 bra.s   loc_4F22E
+0004F1DE ; ---------------------------------------------------------------------------
+0004F1DE
+0004F1DE loc_4F1DE:                              ; CODE XREF: sub_4F0CA+40j
+0004F1DE                 movea.l $93A(a2),a0
+0004F1E2                 tst.l   a0
+0004F1E4                 beq.s   loc_4F22E
+0004F1E6                 subq.w  #1,a0
+0004F1E8                 move.l  a0,$93A(a2)
+0004F1EC                 bra.s   loc_4F22E
+0004F1EE ; ---------------------------------------------------------------------------
+0004F1EE
+0004F1EE loc_4F1EE:                              ; CODE XREF: sub_4F0CA+44j
+0004F1EE                                         ; sub_4F0CA+54j
+0004F1EE                 movea.l $DA(a2),a0
+0004F1F2                 btst    #1,7(a0)
+0004F1F8                 beq.s   loc_4F218
+0004F1FA                 move.b  d4,(byte_11CE18).l
+0004F200                 move.b  d4,d0
+0004F202                 extb.l  d0
+0004F204                 lea     (unk_1069F9).l,a0
+0004F20A                 btst    #1,(a0,d0.l)
+0004F210                 beq.s   loc_4F218
+0004F212                 move.b  d0,d4
+0004F214                 addi.b  #$E0,d4
+0004F218
+0004F218 loc_4F218:                              ; CODE XREF: sub_4F0CA+12Ej
+0004F218                                         ; sub_4F0CA+146j
+0004F218                 clr.l   d0
+0004F21A                 move.b  d4,d0
+0004F21C                 lea     (unk_1069F9).l,a0
+0004F222                 btst    #3,(a0,d0.l)
+0004F228                 bne.s   loc_4F22E
+0004F22A                 addq.l  #1,$93A(a2)
+0004F22E
+0004F22E loc_4F22E:                              ; CODE XREF: sub_4F0CA+2Aj
+0004F22E                                         ; sub_4F0CA+8Cj ...
+0004F22E                 clr.l   -(sp)
+0004F230                 move.b  d4,3(sp)
+0004F234                 move.l  a2,-(sp)
+0004F236                 movea.l $62(a2),a0
+0004F23A                 jsr     (a0)
+0004F23C                 clr.l   d0
+0004F23E                 addq.w  #8,sp
+0004F240
+0004F240 loc_4F240:                              ; CODE XREF: sub_4F0CA+9Ej
+0004F240                                         ; sub_4F0CA+EAj ...
+0004F240                 movem.l (sp)+,d2-d5/a2
+0004F244                 rts
+0004F244 ; End of function sub_4F0CA
+0004C2BA
+0004C2BA ; ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦ S U B R O U T I N E ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+0004C2BA
+0004C2BA
+0004C2BA sub_4C2BA:                              ; CODE XREF: ROM:0004C028p
+0004C2BA                                         ; ROM:0004C300p ...
+0004C2BA
+0004C2BA arg_3           =  7
+0004C2BA
+0004C2BA                 move.b  arg_3(sp),d1
+0004C2BE                 movea.l #$2120100,a0
+0004C2C4                 move.b  ($2120101).l,d0
+0004C2CA                 btst    #2,d0
+0004C2CE                 bne.s   loc_4C2DA
+0004C2D0
+0004C2D0 loc_4C2D0:                              ; CODE XREF: sub_4C2BA+1Ej
+0004C2D0                 move.b  1(a0),d0
+0004C2D4                 btst    #2,d0
+0004C2D8                 beq.s   loc_4C2D0
+0004C2DA
+0004C2DA loc_4C2DA:                              ; CODE XREF: sub_4C2BA+14j
+0004C2DA                 move.b  d1,3(a0)
+0004C2DE
+0004C2DE loc_4C2DE:                              ; CODE XREF: sub_4C2BA+2Cj
+0004C2DE                 move.b  1(a0),d0
+0004C2E2                 btst    #2,d0
+0004C2E6                 beq.s   loc_4C2DE
+0004C2E8                 rts
+
